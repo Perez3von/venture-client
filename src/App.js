@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Venture from './views/Venture';
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
+import Home from './views/Home';
+import GuestForm from './components/GuestForm';
+import LoginForm from './components/LoginForm'
+import ProtectedRoutes from './components/PrivateRoutes/ProtectedRoutes';
+import logo from '../src/assets/youthCitiesLogo.png'
 function App() {
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className='main-header'>
+        <img src={logo} alt='logo' id='logo' /> Venture Chat
       </header>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element = {<LoginForm />} />
+          <Route path='/guest/:id' element = {<GuestForm />} /> 
+          {/* <Route element={<ProtectedRoutes />}> */}
+            <Route path='/chatroom/:id' element = {<Venture />} />
+          {/* </Route> */}
+        </Routes>
+      </Router>
+    
     </div>
   );
 }

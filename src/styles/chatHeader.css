@@ -1,0 +1,60 @@
+.chatHeader{
+    display: flex;
+    flex-direction: row;
+    margin:5px;
+    align-items:flex-start;
+}
+
+
+
+.infomation-div{
+    margin: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    
+}
+.participants-count{
+    font-weight: bold;
+    color: #747474;
+}
+.remaining{
+    margin-left:10px;
+    text-align:start;
+    color: #747474;;
+    white-space: nowrap;
+   
+   
+}
+
+.envite-button{
+    width: 120px;
+    height: 50px;
+    text-align: center; line-height: 0.2rem;
+    border-style:none;
+    border-radius: 0.5em;
+    background-color: #ce0000;
+;
+    border-width: 0.05em;
+    padding: 1rem;
+    font-weight: bolder;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+#group-logo{
+    width: 30px;
+}
+
+.envite-noparticipants-div{
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

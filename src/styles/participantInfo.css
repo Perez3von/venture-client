@@ -1,0 +1,125 @@
+:root{
+    --primary: #efb6b2;
+    --secondary: #4e4e4e;
+    --error: #ff4a4a;
+  }
+  
+
+.main-div-participantInfo{
+    
+       /* margin: 50%; */
+       /* margin-right: 100%; */
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   
+      
+
+}
+.user-name{
+  font-size: large;
+  font-weight: bold;
+  color: #2b2b2b;
+}
+audio{
+  display: none;
+}
+.profile-icon{
+  display: flex;
+  width: 50px;
+  /* border-style: solid;
+  border-width:3px;
+  border-color: rgb(81, 248, 123); */
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  justify-content:center;
+  font-size: larger;
+  margin-right: 0.5rem;
+  float: left;
+  background-color: var(--blue-scheme);
+  color: white;
+  padding: 0.1rem;
+  align-items: center;
+  
+  
+}
+.blue{
+  background-color: #0080ff;
+ 
+ }
+ .green{
+ background-color:  green;
+ }
+ .yellow{
+   background-color:  #ffe608;
+ }
+ .red{
+   background-color:  #ce0000;
+ }
+
+.participant-image-div{
+    display: block;
+    /* width: 1.875rem;
+    height: 1.875rem; */
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #4e4e4e;
+    /* margin-left: 100%; */
+
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    /* margin: 0.0001 rem auto; */
+    line-height: 30px;
+    color: var(--primary);
+    text-align: center;
+  
+    font-size: 24px;
+ 
+}
+
+.label-letter-avatar{
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  margin:  0.98rem auto;
+  line-height: 30px;
+  color: var(--primary);
+  background-color: var(--secondary);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.image-div{
+    margin-right: 9%;
+    /* margin-left:50% */
+}
+
+
+.letter-avatar-div{
+    /* align-content: center; */
+    background-color: grey;
+    color: azure;
+    text-align: center;
+    border-radius: 50%;
+    width: 2.3rem;
+    height: 2.3rem;
+}
+
+
+
+.output{
+    height: 60px;
+    font-size: 0.8rem;
+  }
+  .error{
+    color: var(--error);
+  }
+
+  .avatar-input{
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
