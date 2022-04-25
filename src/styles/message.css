@@ -169,7 +169,7 @@ background-color:  #ddfbea;
   }
   .message-header{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     
   }
   b,h4{
@@ -180,7 +180,7 @@ background-color:  #ddfbea;
   .time{
     display: flex;
     justify-items:baseline;
-    justify-content: end;
+    justify-content: flex-end;
     margin-top: 0.5rem;
     font-size: 0.5rem;
     padding: 0.1rem;

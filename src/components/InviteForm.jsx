@@ -11,7 +11,7 @@ const override = css`
   margin: 0 auto;
   border: none;
 `;
-const guestUrl = ''
+
 function invite(){
     setSending(true)
     setTimeout(() => {

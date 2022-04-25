@@ -20,7 +20,7 @@ useEffect(()=>{
         
     }
     
-},[ventureId])
+},[state.ventureId, ventureId])
 
 
 const verifyUser = async (e) =>{

@@ -4,7 +4,6 @@
     --error: #ff4a4a;
   }
   
-
 .main-div-participantInfo{
     
        /* margin: 50%; */
@@ -12,9 +11,6 @@
        display: flex;
        justify-content: center;
        align-items: center;
-   
-      
-
 }
 .user-name{
   font-size: large;
@@ -41,7 +37,6 @@ audio{
   padding: 0.1rem;
   align-items: center;
   
-  
 }
 .blue{
   background-color: #0080ff;
@@ -65,14 +60,12 @@ audio{
     height: 2.5rem;
     background-color: #4e4e4e;
     /* margin-left: 100%; */
-
     border: 1px solid var(--primary);
     border-radius: 50%;
     /* margin: 0.0001 rem auto; */
     line-height: 30px;
     color: var(--primary);
     text-align: center;
-  
     font-size: 24px;
  
 }
@@ -107,9 +100,6 @@ audio{
     width: 2.3rem;
     height: 2.3rem;
 }
-
-
-
 .output{
     height: 60px;
     font-size: 0.8rem;
