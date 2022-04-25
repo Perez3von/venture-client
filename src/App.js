@@ -1,11 +1,12 @@
 
 import './App.css';
 import Venture from './views/Venture';
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
 import Home from './views/Home';
 import GuestForm from './components/GuestForm';
-import LoginForm from './components/LoginForm'
-import ProtectedRoutes from './components/PrivateRoutes/ProtectedRoutes';
+import LoginForm from './components/LoginForm';
+import InviteForm from './components/InviteForm';
+// import ProtectedRoutes from './components/PrivateRoutes/ProtectedRoutes';
 import logo from '../src/assets/youthCitiesLogo.png'
 function App() {
   return (
@@ -18,9 +19,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element = {<LoginForm />} />
           <Route path='/guest/:id' element = {<GuestForm />} /> 
-          {/* <Route element={<ProtectedRoutes />}> */}
-            <Route path='/chatroom/:id' element = {<Venture />} />
-          {/* </Route> */}
+          <Route path='/invite' element = {<InviteForm />} />
+          <Route path='/chatroom/:id' element = {<Venture />} />
         </Routes>
       </Router>
     

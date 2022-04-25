@@ -1,37 +1,37 @@
-import React,{useEffect, useState} from "react";
+import React,{useState} from "react";
 import ParticipantInfo from "../components/ParticipantInfo";
-import { getParticipantsInThread } from "../utils/chatParticipants";
+// import { getParticipantsInThread } from "../utils/chatParticipants";
 import '../styles/chatHeader.css'
 import groupLogo from '../assets/groupIcon.png'
 import { useNavigate, useParams } from "react-router-dom";
-import { participantsSettings } from "../utils/helperFunctions";
-export default function ChatHeader({chat, user}){
+// import { participantsSettings } from "../utils/helperFunctions";
+export default function ChatHeader({chat, user, infoParticipants, userSetting, ventureName}){
 
 
-    const [ infoParticipants, setInfotParticipants] = useState([]);
-    const [titleOfConversation, setitleOfConversation] = useState('');
+    // const [ infoParticipants, setInfotParticipants] = useState([]);
+    // const [titleOfConversation, setitleOfConversation] = useState('');
     // const [ventureId, setVentureId] = useState('');
     const [coversationAudio, setConversationAudio] = useState('')
-    const [remain, setRemain] = useState(0)
+    // const [remain, setRemain] = useState(0)
     const { id } = useParams()
-    const [userSetting, setUserSettings] = useState(null);
+    // const [userSetting, setUserSettings] = useState(null);
     const navigate = useNavigate();
-    useEffect(()=>{
-        console.log(user)
+    // useEffect(()=>{
+    //     console.log(user)
         
-        const participantsInChat = async () =>{
-            const participants = await getParticipantsInThread(id);
-            // const venture = await getVenture
-            setInfotParticipants(participants)
-            const settings = participantsSettings(user, participants);
-            console.log('the Settings', settings, participants)
-            setUserSettings(settings)
-            // setitleOfConversation(participants[0].venture_title)  
-            // setConversationAudio(participants[0].host_audio)          
-        }
-        participantsInChat();
-        console.log('MArio', infoParticipants)
-    }, [id])
+    //     const participantsInChat = async () =>{
+    //         const participants = await getParticipantsInThread(id);
+    //         // const venture = await getVenture
+    //         setInfotParticipants(participants)
+    //         const settings = participantsSettings(user, participants);
+    //         console.log('the Settings', settings, participants)
+    //         setUserSettings(settings)
+    //         // setitleOfConversation(participants[0].venture_title)  
+    //         // setConversationAudio(participants[0].host_audio)          
+    //     }
+    //     participantsInChat();
+    //     console.log('MArio', infoParticipants)
+    // }, [id])
 
 //    const handleHostSound = async () =>{
 //      const tmp = new Audio(setConversationAudio);
@@ -44,7 +44,7 @@ function guestForm(){
 
 function countRemain(chat, user){
     let count = 0;
-    chat.map((msg) => {
+    chat.forEach((msg) => {
         if(msg.username === user){
             count++
         }
@@ -55,7 +55,7 @@ function countRemain(chat, user){
 
     return(userSetting ? 
         <>
-            <h1>{id.split('-')[0]}</h1>
+            <h1>{ventureName}</h1>
             {/* <button onClick={handleHostSound}>Audio</button> */}
 
            

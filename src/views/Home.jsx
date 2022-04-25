@@ -5,16 +5,28 @@ import CreateVentureForm from "../components/CreateVentureForm";
 import {createVentureThreadID} from "../utils/helperFunctions.js"
 import {createNewVentureThread} from "../utils/fetchChat.js"
 import { setStorage, getStorage, setStorageEmail } from "../utils/localStorage";
+import CreateVentureLogged from "../components/CreateVentureLogged";
 export default function Home(){
     const [ventureID, setVentureID] = useState(''); // this might not be needed
     const [ventureTitle, setVentureTitle] = useState('');
     const [firstName, setFirstName] = useState('');
     const [hostEmail, setHostEmail] = useState('');
+    const [loggedIn, setLogged] = useState(false)
     const navigate = useNavigate();
+
     useEffect(()=>{
+        const logged = getStorage('EMAIL');
+        const user = getStorage('USER');
+        console.log('status', logged)
+        if(logged.length !== 0 && user.length !== 0){
+            console.log('here')
+            setHostEmail(logged);
+            setFirstName(user);
+            setLogged(true);
+        }
 
         //check if already logged in, then render without asking for name or email
-    })
+    },[loggedIn]);
    
     const handleCreateThreadByHost = async (event) => {
         event.preventDefault();
@@ -25,6 +37,7 @@ export default function Home(){
             const newVentureObj = {
                ventureID: ventureId,
                 ventureTitle: ventureTitle.split(' ').join('').toLowerCase(),
+                ventureName: ventureTitle,
                 firstName:firstName.toLowerCase(),
                 hostEmail:hostEmail.toLowerCase()
             }
@@ -39,9 +52,11 @@ export default function Home(){
            console.log('Please review your credentials');
         }
     }
-
-    return(
+    if(loggedIn === false){
+       return(
+        
         <>
+      
             <div className="create-header">
                 <h1> Create a venture</h1>
                 <CreateVentureForm 
@@ -58,5 +73,31 @@ export default function Home(){
                 />
             </div>
         </>
-    )
+    ) 
+    }
+    
+    else{
+        return(
+        
+            <>
+          
+                <div className="create-header">
+                    <h1> Create a venture</h1>
+                    <CreateVentureLogged
+                        
+                        ventureTitle = {ventureTitle}
+                        firstName = {firstName}
+                        hostEmail = { hostEmail}
+                        
+                        setVentureTitle = {setVentureTitle}
+                        setFirstName = {setFirstName}
+                        setHostEmail = {setHostEmail}
+                        handleCreateThreadByHost = {handleCreateThreadByHost}
+    
+                    />
+                </div>
+            </>
+        )
+
+    }
 }

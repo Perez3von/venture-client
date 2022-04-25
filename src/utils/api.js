@@ -57,3 +57,36 @@ export const getUserProfile = async (email) => {
     return res;
   
   }
+
+
+  export const getVentureData = async (id) => {
+    const url = `${URL}/api/v1/ventures/${id}`;
+    const data = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+        
+      });
+      
+      const res = await data.json();
+      console.log(data)
+      return res;
+    
+    }
+
+    export const sendEmails = async (inviteInfo) => {
+      const url = `${URL}/api/v1/ventures/invite`;
+      const data = await fetch(url, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+         
+          body: JSON.stringify(inviteInfo)
+        });
+        
+        const res = await data.json();
+       
+        return res;
+      
+      }

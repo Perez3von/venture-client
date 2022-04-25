@@ -3,27 +3,28 @@ import Message from "../components/Message";
 import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { io } from 'socket.io-client';
-import { saveMessage, getMessages } from "../utils/api";
+import { saveMessage, getMessages, getVentureData} from "../utils/api";
 import { getStorage } from "../utils/localStorage";
 import { useNavigate, useParams } from "react-router-dom";
 import ChatHeader from "../components/ChatHeader";
 import { getParticipantsInThread } from "../utils/chatParticipants";
+import { participantsSettings } from "../utils/helperFunctions";
 export default function Venture(){
 
     const [formData, setFormData] = useState('');
     const [formData2, setFormData2]=useState('')
     const [formData3, setFormData3] = useState('');
     const [msgInfo, setMsgInfo] = useState('');
+    const [ventureName, setVentureName] = useState('')
     const [messages, setMessage] = useState([]);
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null);
     const [noAccess, setAccessChat] = useState(false);
-
+    const [infoParticipants, setInfotParticipants] = useState([]);
+    const [userSetting, setUserSettings] = useState(null);
     const socket = useRef();
     const {id} = useParams()
     const navigate = useNavigate();
-    console.log('hey')
-    
    
     useEffect(()=> {
         
@@ -37,8 +38,11 @@ export default function Venture(){
         setUser(username);
         let room = id;
         const oldMessages = async() => {
-            let msg = await getMessages(id);
-            console.log('Le Message', msg)
+            try {
+                let msg = await getMessages(id);
+            const data = await getVentureData(id);
+            setVentureName(data.venture_name);
+            console.log('Le Message', data)
             if(msg === false){
                 alert('This chat does not exist');
                 navigate('/')
@@ -47,6 +51,9 @@ export default function Venture(){
             setMessage(msg.chat);
             
             const participants = await getParticipantsInThread(id);
+            setInfotParticipants(participants);
+            const settings =  participantsSettings(currentUser, participants);
+            setUserSettings(settings);
             // const user = await getUserProfile(userEmail);
             // if(user){
             //     setStorage('USER', user.fname );
@@ -67,6 +74,12 @@ export default function Venture(){
                 alert('You do not have access to this chat')
                 setAccessChat(true)
             }
+                
+            } catch (error) {
+               alert('An error occured, make sure chat url is valid');
+                
+            }
+            
 
         };
         oldMessages();
@@ -135,6 +148,8 @@ export default function Venture(){
         }
        
     }
+
+    
     
     if(loading ) return <h1>Loading...</h1>
     
@@ -142,7 +157,14 @@ export default function Venture(){
         <>
     <div className="content-container">
         <section className="content headerChat">
-             <ChatHeader ventureID = {id} chat = {messages} user={user} />
+             <ChatHeader 
+              ventureName = {ventureName} 
+              chat = {messages}
+              user={user}
+              infoParticipants = {infoParticipants}
+              userSetting = {userSetting}
+              
+              />
              <section className="seperator"></section>
         </section>
         

@@ -208,7 +208,7 @@ background-color:  #ddfbea;
     flex-direction: column;
   }
 
-  .create-header{
+  .create-header, .invite-form-container{
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -216,7 +216,7 @@ background-color:  #ddfbea;
     margin-top: 5rem;
     
   }
-  fieldset, .login-container, .guest-form-container{
+  fieldset, .login-container, .guest-form-container, .invite-form-container{
     border-width: 0.2em;
     border-radius: 5%;
     border-style: solid;
@@ -233,7 +233,7 @@ background-color:  #ddfbea;
     flex-direction: column;
     padding:2rem;
   }
-  .input-create, .login-email-input{
+  .input-create, .login-email-input, .invite-input{
     padding:1rem;
     border-style: solid;
     border-radius:2em;
@@ -242,7 +242,7 @@ background-color:  #ddfbea;
   .login-email-input{
     margin-bottom: 1rem;
   }
-  .primary-btn, .input-sound, .confirm-btn{
+  .primary-btn, .input-sound, .confirm-btn,.invite-btn{
     text-align: center; 
     line-height: 0.2rem;
     border-style:none;
@@ -254,6 +254,11 @@ background-color:  #ddfbea;
     cursor: pointer;
     font-size: larger;
     margin:0.5rem
+  }
+
+
+  .primary-btn:hover, .input-sound:hover, .confirm-btn:hover,.invite-btn:hover{
+    background-color:  rgba(199, 5, 5, 0.849);
   }
   .record-label{
     font-weight: bold;
@@ -279,4 +284,14 @@ background-color:  #ddfbea;
     font-size: 1.5rem;
     text-align: center;
   }
- 
+
+  .invite-form{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+   
+  }
+  .invite-input{
+    margin-top: 1rem;
+  }
+  
