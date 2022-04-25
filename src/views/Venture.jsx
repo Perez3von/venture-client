@@ -1,5 +1,5 @@
 import MessageForm from "../components/MessageForm";
-import Message from "../components/Message";
+import '../styles/message.css'
 import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { io } from 'socket.io-client';
@@ -160,7 +160,7 @@ export default function Venture(){
                 dataTwo = {formData2}
                 dataThree = {formData3}
             />
-            <section id='chat'>
+            <section id='chat' className='chat-container'>
                 <ul>
                     {messages.map((message, id) => {
                      
