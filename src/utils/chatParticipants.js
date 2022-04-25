@@ -64,3 +64,4 @@ export const newParticipant = async (ventureId, guestEmail, name) =>{
     console.log(data);
     return data;
 }
+

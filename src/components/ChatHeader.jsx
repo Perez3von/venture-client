@@ -3,7 +3,7 @@ import ParticipantInfo from "../components/ParticipantInfo";
 import { getParticipantsInThread } from "../utils/chatParticipants";
 import '../styles/chatHeader.css'
 import groupLogo from '../assets/groupIcon.png'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { participantsSettings } from "../utils/helperFunctions";
 export default function ChatHeader({chat, user}){
 
@@ -15,12 +15,13 @@ export default function ChatHeader({chat, user}){
     const [remain, setRemain] = useState(0)
     const { id } = useParams()
     const [userSetting, setUserSettings] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(()=>{
         console.log(user)
         
         const participantsInChat = async () =>{
             const participants = await getParticipantsInThread(id);
+            // const venture = await getVenture
             setInfotParticipants(participants)
             const settings = participantsSettings(user, participants);
             console.log('the Settings', settings, participants)
@@ -37,6 +38,9 @@ export default function ChatHeader({chat, user}){
 //      tmp.play();
 
 //    };
+function guestForm(){
+    navigate('/invite', {state:{ventureId:id},replace:true})
+}
 
 function countRemain(chat, user){
     let count = 0;
@@ -98,7 +102,7 @@ function countRemain(chat, user){
                     }
                  
                     <div className="envite-noparticipants-div">
-                        <button className="envite-button">Invite
+                        <button className="envite-button" onClick={guestForm}>Invite
                         <img id="group-logo" src={groupLogo} alt='group-logo' />
                        
                         </button>

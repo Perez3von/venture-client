@@ -8,9 +8,6 @@ import LoginForm from './components/LoginForm'
 import ProtectedRoutes from './components/PrivateRoutes/ProtectedRoutes';
 import logo from '../src/assets/youthCitiesLogo.png'
 function App() {
-
-
-
   return (
     <div className="App">
       <header className='main-header'>

@@ -10,6 +10,7 @@ export default function GuestForm(){
 const [guestName, setGuestName] = useState('');
 const [guestEmail, setGuestEmail] = useState('');
 const [roomAccess, setRoomAccess] = useState(false)
+const [allParticipants, setParticipants] = useState(null)
 const { id }  = useParams()
 const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ useEffect(()=>{
         const participants = await getParticipantsInThread(id);
         if(participants.length < 4){
             setRoomAccess(true);
+            setParticipants(participants);
         }
         else{
                 alert('The room cannot accept anymore participants');
@@ -36,13 +38,27 @@ useEffect(()=>{
 
 
 async function joinChat(){
+    let re = false;
+    if(roomAccess === true && guestEmail !== '' && guestName !== ''){
+        allParticipants.forEach(p => {if(p.user_email === guestEmail){
+                re =true
+        }})
+        if(re === false){
+            await newParticipant(id, guestEmail, guestName);
+            setStorage('USER', guestName);
+            setStorageEmail
+            ('EMAIL', guestEmail);
+            navigate(`/chatroom/${id}`)
+        }
+        else{
 
-    if(roomAccess === true){
-        await newParticipant(id, guestEmail, guestName);
-        setStorage('USER', guestName);
-        setStorageEmail
-        ('EMAIL', guestEmail);
-        navigate(`/chatroom/${id}`)
+            alert('You are already apart of this');
+            setStorage('USER', guestName);
+            setStorageEmail
+            ('EMAIL', guestEmail);
+            navigate(`/chatroom/${id}`)
+        }
+        
         
     }
 
