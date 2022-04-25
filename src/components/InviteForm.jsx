@@ -1,7 +1,5 @@
 
-
-// import '../styles/message.css'
-import { ClipLoader, SyncLoader, PulseLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { css } from "@emotion/react";
 import { useState } from "react"
 

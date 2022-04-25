@@ -1,12 +1,11 @@
 
 import './App.css';
 import Venture from './views/Venture';
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './views/Home';
 import GuestForm from './components/GuestForm';
 import LoginForm from './components/LoginForm';
 import InviteForm from './components/InviteForm';
-// import ProtectedRoutes from './components/PrivateRoutes/ProtectedRoutes';
 import logo from '../src/assets/youthCitiesLogo.png'
 function App() {
   return (

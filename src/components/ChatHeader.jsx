@@ -63,39 +63,20 @@ function countRemain(chat, user){
                 <header className='chatHeader'>
                     { 
                         infoParticipants.map( information => {
-                            if(information.fname.charAt(0).toUpperCase() + information.fname.slice(1) === user){
-                                return(
-                                    <div key={information.fname} className = 'information-div'>
-    
-                                        <ParticipantInfo
-                                            userEmail = {information.user_email}  
-                                            name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
-                                            image_url = {information.profile_image}
-                                            message_remining = {countRemain(chat, user)}
-                                            color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
-                                            ventureId={id}
-                                        />
-                                    </div>
-    
-                                )
+                            return(
+                                <div key={information.fname} className = 'information-div'>
 
-                            }
-                            else{
-                                return(
-                                    <div key={information.fname} className = 'information-div'>
-    
-                                        <ParticipantInfo
-                                            userEmail = {information.user_email}  
-                                            name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
-                                            image_url = {information.profile_image}
-                                            message_remining = {countRemain(chat, information.fname.charAt(0).toUpperCase() + information.fname.slice(1))}
-                                            color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
-                                            ventureId={id}
-                                        />
-                                    </div>
-    
-                                )
-                            }
+                                    <ParticipantInfo
+                                        userEmail = {information.user_email}  
+                                        name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
+                                        image_url = {information.profile_image}
+                                        message_remining = {countRemain(chat, information.fname.charAt(0).toUpperCase() + information.fname.slice(1))}
+                                        color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
+                                        ventureId={id}
+                                    />
+                                </div>
+
+                            )
                             
                         })
 

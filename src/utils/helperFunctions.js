@@ -7,6 +7,7 @@ export function createVentureThreadID(hostEmail, ventureTitle){
 
 export function participantsSettings(currentUser, participants){
     const colors = ['red', 'green', 'yellow' ];
+	const msgColors = ['#ffdbdb','#ddfbea', '#f8ffdb']
     let settings = {};
     let c = 0;
 
@@ -16,10 +17,11 @@ export function participantsSettings(currentUser, participants){
     		let color = '';
     		if(currentUser === participants[i].fname.charAt(0).toUpperCase() + participants[i].fname.slice(1) ){
     			className = 'currentUser';
-    			color = 'blue'
+    			color = '#0080ff'
     			settings[participants[i].fname.charAt(0).toUpperCase() + participants[i].fname.slice(1)] = {
     				class:className,
-    				color:color
+    				color:color,
+					msgColor:'#ddecfb'
     			}
     
     		}
@@ -30,7 +32,8 @@ export function participantsSettings(currentUser, participants){
     
     			settings[participants[i].fname.charAt(0).toUpperCase() + participants[i].fname.slice(1)] = {
     				class:className,
-    				color:color
+    				color:color,
+					msgColor:msgColors[c]
     			}
     
     			c++;

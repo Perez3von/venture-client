@@ -7,7 +7,7 @@ import {createNewVentureThread} from "../utils/fetchChat.js"
 import { setStorage, getStorage, setStorageEmail } from "../utils/localStorage";
 import CreateVentureLogged from "../components/CreateVentureLogged";
 export default function Home(){
-    const [ventureID, setVentureID] = useState(''); // this might not be needed
+    const [ventureID, setVentureID] = useState(''); 
     const [ventureTitle, setVentureTitle] = useState('');
     const [firstName, setFirstName] = useState('');
     const [hostEmail, setHostEmail] = useState('');
@@ -24,8 +24,6 @@ export default function Home(){
             setFirstName(user);
             setLogged(true);
         }
-
-        //check if already logged in, then render without asking for name or email
     },[loggedIn]);
    
     const handleCreateThreadByHost = async (event) => {
@@ -48,7 +46,6 @@ export default function Home(){
             navigate(`/chatroom/${ventureTitle.split(' ').join('').toLowerCase() + '-' + firstName.toLowerCase()}`)
         
         } catch (error) {
-            // the error to display
            console.log('Please review your credentials');
         }
     }
@@ -73,8 +70,7 @@ export default function Home(){
                 />
             </div>
         </>
-    ) 
-    }
+    )}
     
     else{
         return(
