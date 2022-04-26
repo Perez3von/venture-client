@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getParticipantsInThread } from "../utils/chatParticipants";
 import { getUserProfile } from "../utils/api";
-import { setStorage, setStorageEmail } from "../utils/localStorage";
+import { setStorage, setStorageEmail,getStorage } from "../utils/localStorage";
 export default function LoginForm(props){
 const {state} = useLocation();
 const [ventureId, setVentureId] = useState(null);
@@ -11,25 +11,22 @@ const [userEmailConfirm, setUserEmailConfirm] = useState('')
 const navigate = useNavigate();
 
 useEffect(()=>{
-    try {
-            console.log(ventureId)
-            setVentureId(state.ventureId)
-    
-    } catch (error) {
-       console.log(error)
-        
+    const user = getStorage('EMAIL');
+    if(user.length !== 0){
+        navigate('/')
     }
-    
-},[state.ventureId, ventureId])
 
 
+},[navigate])
 const verifyUser = async (e) =>{
+    
     e.preventDefault();
     if(userEmail === userEmailConfirm){
             try {
                 
                 const user = await getUserProfile(userEmail);
                 if(user && state !== null){
+                    setVentureId(state.ventureId)
                     setStorage('USER', user.fname);
                     setStorageEmail('EMAIL', userEmail);
                     const participants = await getParticipantsInThread(ventureId);
@@ -71,7 +68,7 @@ function handleChangeConfirm(e){
         <div className="login-container">
             
             <section>
-                {ventureId && <h1>Access venture: {ventureId.split('-')[0]}</h1>}
+                {ventureId && <h1>Access Venture: {ventureId.split('-')[0]}</h1>}
             </section>
             <section className="login-form">
                 <h1 className="login-head">Login</h1>

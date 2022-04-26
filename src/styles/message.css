@@ -21,8 +21,6 @@ h1{
   color: white;
   padding: 0.1rem;
   font-size: small;
-  
- 
 }
 
 
@@ -222,6 +220,7 @@ background-color:  #ddfbea;
     border-radius: 5%;
     border-style: solid;
     border-color: rgb(183, 4, 4);
+    box-shadow: 10px 5px 5px rgb(155, 155, 155);
    
   }
   .login-container{
@@ -237,8 +236,12 @@ background-color:  #ddfbea;
   .input-create, .login-email-input, .invite-input{
     padding:1rem;
     border-style: solid;
-    border-radius:2em;
+    border-radius:0.5em;
+    margin-top: 0.5rem;
    font-size: larger;
+  }
+  .input-create:hover{
+   opacity: 0.8;
   }
   .login-email-input{
     margin-bottom: 1rem;
