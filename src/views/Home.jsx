@@ -52,16 +52,45 @@ export default function Home(){
     if(loggedIn === false){
        return(
         
-        <>
-      
+        <section className="landing">
+        {/* <div className="bubbles-container">
+            <div className="msg-bubble green-bubble"> 
+                    <div className='message-container'> 
+                            <p> 
+                                <div className='message-header' >
+                                    <b>Expand</b> <b>Solution</b> 
+                                </div>
+                                <br></br>
+                                You could try using css only for you design..
+                                <br></br>
+                                <div className={`user-image currentUser`} > A </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div className="msg-bubble yellow-bubble"> 
+                    <div className='message-container'> 
+                            <p> 
+                                <div className='message-header' >
+                                    <b>Expand</b> <b>Solution</b> 
+                                </div>
+                                <br></br>
+                                You could try
+                                <br></br>
+                                <div className={`user-image otherUser`} > H </div>
+                            </p>
+                        </div>
+                    </div>
+
+        </div> */}
+       
             <div className="create-header">
                 <h1> Create a venture</h1>
+                
                 <CreateVentureForm 
-                    
+
                     ventureTitle = {ventureTitle}
                     firstName = {firstName}
                     hostEmail = { hostEmail}
-                    
                     setVentureTitle = {setVentureTitle}
                     setFirstName = {setFirstName}
                     setHostEmail = {setHostEmail}
@@ -69,13 +98,13 @@ export default function Home(){
 
                 />
             </div>
-        </>
+        </section>
     )}
     
     else{
         return(
         
-            <>
+            <section className="landing">
           
                 <div className="create-header">
                     <h1> Create a venture</h1>
@@ -84,7 +113,6 @@ export default function Home(){
                         ventureTitle = {ventureTitle}
                         firstName = {firstName}
                         hostEmail = { hostEmail}
-                        
                         setVentureTitle = {setVentureTitle}
                         setFirstName = {setFirstName}
                         setHostEmail = {setHostEmail}
@@ -92,7 +120,7 @@ export default function Home(){
     
                     />
                 </div>
-            </>
+            </section>
         )
 
     }
