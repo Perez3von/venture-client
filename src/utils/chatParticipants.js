@@ -6,11 +6,8 @@ export const getParticipantsInThread = async (ventureID) => {
     // const ventureId = ventureID.split(' ');
     const ventureId = ventureID;
 
-    if(ventureId.length === 1){
-        loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`
-    } else{
-        loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`;
-    }
+    loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`
+   
        
     const data = await fetch(loginUrl, {
         method: "GET",

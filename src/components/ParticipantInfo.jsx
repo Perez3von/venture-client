@@ -1,7 +1,7 @@
 
 import '../styles/participantInfo.css';
-export default function ParticipantInfo({ name, message_remining, color}){
 
+export default function ParticipantInfo({ name, message_remining, color}){
     return(
         < div className='main-div-participantInfo' >
           <div className={`profile-icon ${color}`}>{name[0].toUpperCase()}</div>

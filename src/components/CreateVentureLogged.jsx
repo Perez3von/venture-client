@@ -14,7 +14,7 @@ export default function CreateVentureLogged({
         <div className='form-containers' >
             <form className='form-main' onSubmit={handleCreateThreadByHost} >
                 <fieldset>
-                    <legend className='legend'>Join the chat</legend>
+                    <legend className='legend'>Create your venture</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1>
                     <label htmlFor='ventureTitle'>
                     <input

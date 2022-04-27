@@ -9,6 +9,15 @@
  
   
 }
+/* .logout-btn{
+  color: black;
+  background-color: none;
+  border-style: none;
+  font-size: large;
+  font-style: italic;
+  font-weight: 00;
+  margin-left: 2rem;
+} */
 
 .main-header{
   display: flex;
@@ -21,12 +30,12 @@
   margin:0;
   background-color: rgb(243, 243, 243);
   width: 100%;
-  height: 10em;
+  height: 6em;
   /* margin-bottom: 2rem; */
 }
 
 #logo{
-  width: 10rem;
+  width: 6rem;
  
 }
 

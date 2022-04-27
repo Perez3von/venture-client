@@ -53,7 +53,7 @@ export const getUserProfile = async (email) => {
     });
     
     const res = await data.json();
-   
+   console.log(res)
     return res;
   
   }
@@ -84,9 +84,22 @@ export const getUserProfile = async (email) => {
          
           body: JSON.stringify(inviteInfo)
         });
-        
-        const res = await data.json();
        
-        return res;
+        return data;
       
       }
+
+    export const exportVentureChat = async (email, id) => {
+      const url = `${URL}/api/v1/ventures/export/${id}`;
+      const data = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+       
+        body: JSON.stringify({email:email})
+      });
+
+      return data;
+    }

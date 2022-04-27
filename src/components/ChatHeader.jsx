@@ -3,13 +3,34 @@ import ParticipantInfo from "../components/ParticipantInfo";
 import '../styles/chatHeader.css'
 import groupLogo from '../assets/groupIcon.png'
 import { useNavigate, useParams } from "react-router-dom";
+import { getStorage } from "../utils/localStorage";
+import { exportVentureChat } from "../utils/api";
+import { css } from "@emotion/react";
+import { PulseLoader } from "react-spinners";
+import { useState } from "react";
+
 export default function ChatHeader({chat, user, infoParticipants, userSetting, ventureName}){
 
 const { id } = useParams()
 const navigate = useNavigate();
+const [sending, setSending] = useState(false);
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border: none;
+`;
 
 function guestForm(){
-    navigate('/invite', {state:{ventureId:id},replace:true})
+    navigate('/invite', {state:{ventureId:id, ventureTitle:ventureName},replace:true})
+}
+async function exportChat(){
+    setSending(true)
+    const email = getStorage('EMAIL');
+    await exportVentureChat(email, id);
+    setTimeout(() => {
+        console.log("Delayed for 4 second.");
+       setSending(false);
+      }, "4000");
 }
 
 function countRemain(chat, user){
@@ -22,7 +43,7 @@ function countRemain(chat, user){
    return count;
 
 }
-    return(userSetting ? 
+    return(
         <>
             <h1>{ventureName}</h1>
                 <header className='chatHeader'>
@@ -40,23 +61,20 @@ function countRemain(chat, user){
                                         ventureId={id}
                                     />
                                 </div>
-
                             )
-                            
                         })
-
                     }
                  
                     <div className="envite-noparticipants-div">
+                    {sending? <PulseLoader color={"#c70505"} loading={sending} css={override} size={2} /> : <button className="export-btn" onClick={exportChat} > Export </button>}
                         <button className="envite-button" onClick={guestForm}>Invite
                         <img id="group-logo" src={groupLogo} alt='group-logo' />
-                       
+    
                         </button>
-
                         <p className="participants-count">{infoParticipants.length} /4 participants</p>
                     </div>
                 </header>
                   
         </>
-    : <></>)
+    )
 }

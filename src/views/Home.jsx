@@ -84,7 +84,7 @@ export default function Home(){
         </div> */}
        
             <div className="create-header">
-                <h1> Create a venture</h1>
+                <h1>Venture Chat</h1>
                 
                 <CreateVentureForm 
 
@@ -107,7 +107,7 @@ export default function Home(){
             <section className="landing">
           
                 <div className="create-header">
-                    <h1> Create a venture</h1>
+                    <h1> Venture Chat </h1>
                     <CreateVentureLogged
                         
                         ventureTitle = {ventureTitle}

@@ -12,29 +12,32 @@ const navigate = useNavigate();
 
 useEffect(()=>{
     const user = getStorage('EMAIL');
-    if(user.length !== 0){
+    //if user is already logged then take to home or if state contains venture, take to venture
+
+    if(user.length !== 0 && state.ventureId === null){
         navigate('/')
     }
+},[navigate]);
 
-
-},[navigate])
 const verifyUser = async (e) =>{
     
     e.preventDefault();
     if(userEmail === userEmailConfirm){
             try {
-                
+                setVentureId(state.ventureId)
                 const user = await getUserProfile(userEmail);
+                console.log('The USER', user)
                 if(user && state !== null){
-                    setVentureId(state.ventureId)
-                    setStorage('USER', user.fname);
-                    setStorageEmail('EMAIL', userEmail);
-                    const participants = await getParticipantsInThread(ventureId);
-                        for(let i = 0; i < participants.length; i++){
-                            if(user.user_email === participants[i].user_email){
-                                navigate(`/chatroom/${ventureId}`);
-                            }
-                    } 
+                    
+                    const participants = await getParticipantsInThread(state.ventureId);
+                    console.log('the parts', participants,'USer', user, 'State', state)
+                    participants.forEach(person => {
+                        if(user.user_email === person.user_email){
+                                setStorage('USER', user.fname);
+                                setStorageEmail('EMAIL', user.user_email);
+                                navigate(`/chatroom/${state.ventureId}`);
+                        }
+                    })
                 }
                 else if(user){
                     setStorage('USER', user.fname);
@@ -67,9 +70,9 @@ function handleChangeConfirm(e){
         
         <div className="login-container">
             
-            <section>
-                {ventureId && <h1>Access Venture: {ventureId.split('-')[0]}</h1>}
-            </section>
+            {/* <section>
+                {state.ventureId? <h2>Access Venture: {ventureId.split('-')[0]}</h2> : <></>}
+            </section> */}
             <section className="login-form">
                 <h1 className="login-head">Login</h1>
                  <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={(event)=> handleChange(event.target.value)}/>
