@@ -17,7 +17,7 @@ useEffect(()=>{
     if(user.length !== 0 && state.ventureId === null){
         navigate('/')
     }
-},[navigate]);
+});
 
 const verifyUser = async (e) =>{
     
@@ -27,6 +27,7 @@ const verifyUser = async (e) =>{
                 setVentureId(state.ventureId)
                 const user = await getUserProfile(userEmail);
                 console.log('The USER', user)
+                console.log(ventureId)
                 if(user && state !== null){
                     
                     const participants = await getParticipantsInThread(state.ventureId);

@@ -1,4 +1,4 @@
-const url = 'http://localhost:8800';
+const url= process.env.API_URL;
 
 export const getParticipantsInThread = async (ventureID) => {
 

@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8800'
+const URL = process.env.API_URL;
 
 export const saveMessage = async (msg) =>{
 

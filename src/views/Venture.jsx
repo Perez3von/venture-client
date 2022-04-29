@@ -77,7 +77,8 @@ export default function Venture(){
             };
             oldMessages();
         };
-        socket.current = io('ws://localhost:8900');
+        // socket.current = io('ws://localhost:8900');
+        socket.current = io(`ws://${process.env.SOCKET_URL}`);
         socket.current.emit('create', {
                 room: room });
     },[id, navigate]);

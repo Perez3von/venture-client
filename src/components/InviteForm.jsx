@@ -31,7 +31,7 @@ useEffect(()=>{
 
 
 async function invite(){
-    const guestUrl = `http://localhost:3000/guest/${state.ventureId}`;
+    const guestUrl = `${process.env.API_URL}/guest/${state.ventureId}`;
     const title = state.ventureTitle;
     const currUser = getStorage('USER');
 
