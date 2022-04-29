@@ -1,7 +1,9 @@
-const url = process.env.API_URL;
+
+const url = 'https://venturechat.herokuapp.com'
 
 export const createNewVentureThread = async (newVentureObj) => {
     console.log('venture Obj', newVentureObj)
+    console.log(url)
     const loginUrl = `${url}/api/v1/ventures/create`;
     
     const data = await fetch(loginUrl, {

@@ -1,4 +1,4 @@
-const URL = process.env.API_URL;
+const URL = 'https://venturechat.herokuapp.com';
 
 export const saveMessage = async (msg) =>{
 

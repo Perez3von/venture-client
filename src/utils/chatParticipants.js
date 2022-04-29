@@ -1,4 +1,4 @@
-const url= process.env.API_URL;
+const url= 'https://venturechat.herokuapp.com';
 
 export const getParticipantsInThread = async (ventureID) => {
 
