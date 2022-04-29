@@ -31,7 +31,7 @@ useEffect(()=>{
 
 
 async function invite(){
-    const guestUrl = `${process.env.API_URL}/guest/${state.ventureId}`;
+    const guestUrl = `https://venture-chat.netlify.app/guest/${state.ventureId}`;
     const title = state.ventureTitle;
     const currUser = getStorage('USER');
 
