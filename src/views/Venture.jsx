@@ -79,8 +79,7 @@ export default function Venture(){
         };
         // socket.current = io('ws://localhost:8900');
         socket.current = io(`ws:https://venturechatsocket.herokuapp.com `,{
-            withCredentials: true,
-            transports: ["websocket"] 
+            withCredentials: true
         });
         socket.current.emit('create', {
                 room: room });
