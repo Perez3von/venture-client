@@ -22,11 +22,12 @@ function App() {
       </header>
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element = {<LoginForm />} />
-          <Route path='/guest/:id' element = {<GuestForm />} /> 
-          <Route path='/invite' element = {<InviteForm />} />
-          <Route path='/chatroom/:id' element = {<Venture />} />
+
+          <Route exact path='/chatroom/:id' element = {<Venture />} />
+          <Route exact path='/login' element = {<LoginForm />} />
+          <Route exact path='/guest/:id' element = {<GuestForm />} /> 
+          <Route exact path='/invite' element = {<InviteForm />} />
+          <Route exact path='/' element={<Home />} />
         </Routes>
       </Router>
     
