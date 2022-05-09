@@ -6,13 +6,24 @@ import {createVentureThreadID} from "../utils/helperFunctions.js"
 import {createNewVentureThread} from "../utils/fetchChat.js"
 import { setStorage, getStorage, setStorageEmail } from "../utils/localStorage";
 import CreateVentureLogged from "../components/CreateVentureLogged";
+import { useReactMediaRecorder } from "react-media-recorder";
 export default function Home(){
     const [ventureID, setVentureID] = useState(''); 
     const [ventureTitle, setVentureTitle] = useState('');
     const [firstName, setFirstName] = useState('');
     const [hostEmail, setHostEmail] = useState('');
+    const [hostSound, setHostSound] = useState('');
+    const [recording, setRecording] = useState(false);
+    const [aboutVenture, setAboutVenture] = useState('');
+    const [timeId, setTimeId] = useState(0);
     const [loggedIn, setLogged] = useState(false)
     const navigate = useNavigate();
+    const {
+        status,
+        startRecording,
+        stopRecording,
+        mediaBlobUrl,
+    } = useReactMediaRecorder({audio:true})
 
     useEffect(()=>{
         const logged = getStorage('EMAIL');
@@ -25,7 +36,35 @@ export default function Home(){
             setLogged(true);
         }
     },[loggedIn]);
-   
+
+
+    const getRecording = {
+    
+        beginRecording: function(){
+            setRecording(true);
+            startRecording();
+            const timer = setTimeout(function() {
+                setRecording(false);
+                stopRecording();
+                setHostSound(mediaBlobUrl);
+                console.log('normal stopping')
+            }, 31000, 'err')
+            console.log('starting')
+            console.log('Recording status:', status);
+            setTimeId(timer)
+            console.log(timeId)
+            
+        },
+        cancelRecording: function(){
+            console.log('early stop')   
+            clearTimeout(timeId);
+            setRecording(false);
+            stopRecording();
+            setHostSound(mediaBlobUrl);
+        }
+
+    }
+  
     const handleCreateThreadByHost = async (event) => {
         event.preventDefault();
         console.log(ventureID);
@@ -37,7 +76,9 @@ export default function Home(){
                 ventureTitle: ventureTitle.split(' ').join('').toLowerCase(),
                 ventureName: ventureTitle,
                 firstName:firstName.toLowerCase(),
-                hostEmail:hostEmail.toLowerCase()
+                hostEmail:hostEmail.toLowerCase(),
+                hostSound:hostSound,
+                ventureBio:aboutVenture
             }
             await createNewVentureThread(newVentureObj);
           
@@ -53,36 +94,7 @@ export default function Home(){
        return(
         
         <section className="landing">
-        {/* <div className="bubbles-container">
-            <div className="msg-bubble green-bubble"> 
-                    <div className='message-container'> 
-                            <p> 
-                                <div className='message-header' >
-                                    <b>Expand</b> <b>Solution</b> 
-                                </div>
-                                <br></br>
-                                You could try using css only for you design..
-                                <br></br>
-                                <div className={`user-image currentUser`} > A </div>
-                            </p>
-                        </div>
-                    </div>
-                    <div className="msg-bubble yellow-bubble"> 
-                    <div className='message-container'> 
-                            <p> 
-                                <div className='message-header' >
-                                    <b>Expand</b> <b>Solution</b> 
-                                </div>
-                                <br></br>
-                                You could try
-                                <br></br>
-                                <div className={`user-image otherUser`} > H </div>
-                            </p>
-                        </div>
-                    </div>
-
-        </div> */}
-       
+    
             <div className="create-header">
                 <h1>Venture Chat</h1>
                 
@@ -90,11 +102,17 @@ export default function Home(){
 
                     ventureTitle = {ventureTitle}
                     firstName = {firstName}
-                    hostEmail = { hostEmail}
+                    hostEmail = {hostEmail}
+                    aboutVenture = {aboutVenture}
                     setVentureTitle = {setVentureTitle}
                     setFirstName = {setFirstName}
                     setHostEmail = {setHostEmail}
+                    setAboutVenture = {setAboutVenture}
                     handleCreateThreadByHost = {handleCreateThreadByHost}
+                    getRecording ={getRecording}
+                    hostSound ={mediaBlobUrl}
+                    recordingState = {recording}
+                    
 
                 />
             </div>
@@ -116,8 +134,11 @@ export default function Home(){
                         setVentureTitle = {setVentureTitle}
                         setFirstName = {setFirstName}
                         setHostEmail = {setHostEmail}
+                        setAboutVenture = {setAboutVenture}
                         handleCreateThreadByHost = {handleCreateThreadByHost}
-    
+                        getRecording = {getRecording}
+                        hostSound = {mediaBlobUrl}
+                        recordingState = {recording}
                     />
                 </div>
             </section>
