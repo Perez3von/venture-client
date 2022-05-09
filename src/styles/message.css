@@ -109,6 +109,9 @@ background-color:  #00a000;
   width: 100%;
 
 }
+#save-recording-btn{
+  margin-right: 1rem;
+}
 
 :root {
     --blue-scheme: rgb(0, 98, 255);
@@ -123,6 +126,13 @@ background-color:  #00a000;
     max-width: 50%;
     /* margin: 0 auto; */
     border-right: 3px solid rgb(207, 205, 205);
+  }
+  .audio-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .audio-options{
+    margin-bottom: 1rem;
   }
   form {
     height: 100vh;
