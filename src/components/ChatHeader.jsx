@@ -9,7 +9,7 @@ import { css } from "@emotion/react";
 import { PulseLoader } from "react-spinners";
 import { useState } from "react";
 
-export default function ChatHeader({chat, user, infoParticipants, userSetting, ventureName}){
+export default function ChatHeader({chat, user, infoParticipants, userSetting, ventureName, ventureBio}){
 
 const { id } = useParams()
 const navigate = useNavigate();
@@ -46,6 +46,7 @@ function countRemain(chat, user){
     return(
         <>
             <h1>{ventureName}</h1>
+            <h2>{ventureBio}</h2>
                 <header className='chatHeader'>
                     { 
                         infoParticipants.map( information => {
