@@ -184,6 +184,7 @@ export default function Venture(){
                 dataOne = {formData}
                 dataTwo = {formData2}
                 dataThree = {formData3}
+                hostAudio = {hostAudio}
             />
             <section id='chat' className='chat-container'>
                 <ul>
