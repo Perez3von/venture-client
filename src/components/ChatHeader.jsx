@@ -1,46 +1,41 @@
-import React,{useEffect, useState} from "react";
+
 import ParticipantInfo from "../components/ParticipantInfo";
-import { getParticipantsInThread } from "../utils/chatParticipants";
 import '../styles/chatHeader.css'
 import groupLogo from '../assets/groupIcon.png'
-import { useParams } from "react-router-dom";
-import { participantsSettings } from "../utils/helperFunctions";
-export default function ChatHeader({chat, user}){
+import { useNavigate, useParams } from "react-router-dom";
+import { getStorage } from "../utils/localStorage";
+import { exportVentureChat } from "../utils/api";
+import { css } from "@emotion/react";
+import { PulseLoader } from "react-spinners";
+import { useState } from "react";
 
+export default function ChatHeader({chat, user, infoParticipants, userSetting, ventureName}){
 
-    const [ infoParticipants, setInfotParticipants] = useState([]);
-    const [titleOfConversation, setitleOfConversation] = useState('');
-    // const [ventureId, setVentureId] = useState('');
-    const [coversationAudio, setConversationAudio] = useState('')
-    const [remain, setRemain] = useState(0)
-    const { id } = useParams()
-    const [userSetting, setUserSettings] = useState(null);
+const { id } = useParams()
+const navigate = useNavigate();
+const [sending, setSending] = useState(false);
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border: none;
+`;
 
-    useEffect(()=>{
-        console.log(user)
-        
-        const participantsInChat = async () =>{
-            const participants = await getParticipantsInThread(id);
-            setInfotParticipants(participants)
-            const settings = participantsSettings(user, participants);
-            console.log('the Settings', settings, participants)
-            setUserSettings(settings)
-            // setitleOfConversation(participants[0].venture_title)  
-            // setConversationAudio(participants[0].host_audio)          
-        }
-        participantsInChat();
-        console.log('MArio', infoParticipants)
-    }, [id])
-
-//    const handleHostSound = async () =>{
-//      const tmp = new Audio(setConversationAudio);
-//      tmp.play();
-
-//    };
+function guestForm(){
+    navigate('/invite', {state:{ventureId:id, ventureTitle:ventureName},replace:true})
+}
+async function exportChat(){
+    setSending(true)
+    const email = getStorage('EMAIL');
+    await exportVentureChat(email, id);
+    setTimeout(() => {
+        console.log("Delayed for 4 second.");
+       setSending(false);
+      }, "4000");
+}
 
 function countRemain(chat, user){
     let count = 0;
-    chat.map((msg) => {
+    chat.forEach((msg) => {
         if(msg.username === user){
             count++
         }
@@ -48,67 +43,38 @@ function countRemain(chat, user){
    return count;
 
 }
-
-    return(userSetting ? 
+    return(
         <>
-            <h1>{id.split('-')[0]}</h1>
-            {/* <button onClick={handleHostSound}>Audio</button> */}
-
-           
-            <audio src={coversationAudio}></audio>
+            <h1>{ventureName}</h1>
                 <header className='chatHeader'>
                     { 
                         infoParticipants.map( information => {
-                            if(information.fname.charAt(0).toUpperCase() + information.fname.slice(1) === user){
-                                return(
-                                    <div key={information.fname} className = 'information-div'>
-    
-                                        <ParticipantInfo
-                                            userEmail = {information.user_email}  
-                                            name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
-                                            image_url = {information.profile_image}
-                                            message_remining = {countRemain(chat, user)}
-                                            color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
-                                            ventureId={id}
-                                        />
-                                    </div>
-    
-                                )
+                            return(
+                                <div key={information.fname} className = 'information-div'>
 
-                            }
-                            else{
-                                return(
-                                    <div key={information.fname} className = 'information-div'>
-    
-                                        <ParticipantInfo
-                                            userEmail = {information.user_email}  
-                                            name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
-                                            image_url = {information.profile_image}
-                                            message_remining = {countRemain(chat, information.fname.charAt(0).toUpperCase() + information.fname.slice(1))}
-                                            color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
-                                            ventureId={id}
-                                        />
-                                    </div>
-    
-                                )
-                            }
-                            
+                                    <ParticipantInfo
+                                        userEmail = {information.user_email}  
+                                        name ={information.fname.charAt(0).toUpperCase() + information.fname.slice(1)}
+                                        image_url = {information.profile_image}
+                                        message_remining = {countRemain(chat, information.fname.charAt(0).toUpperCase() + information.fname.slice(1))}
+                                        color = {userSetting[information.fname.charAt(0).toUpperCase() + information.fname.slice(1)].color}
+                                        ventureId={id}
+                                    />
+                                </div>
+                            )
                         })
-
                     }
                  
                     <div className="envite-noparticipants-div">
-                        <button className="envite-button">Invite
+                    {sending? <PulseLoader color={"#c70505"} loading={sending} css={override} size={2} /> : <button className="export-btn" onClick={exportChat} > Export </button>}
+                        <button className="envite-button" onClick={guestForm}>Invite
                         <img id="group-logo" src={groupLogo} alt='group-logo' />
-                       
+    
                         </button>
-
                         <p className="participants-count">{infoParticipants.length} /4 participants</p>
                     </div>
                 </header>
-                    <audio media-player="audioPlayer" controls="controls"     preload="auto" id="audioElement"
-                        crossOrigin="anonymous" src={coversationAudio}
-                     ></audio>
+                  
         </>
-    : <></>)
+    )
 }

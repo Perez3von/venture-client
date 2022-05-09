@@ -5,8 +5,6 @@
     align-items:flex-start;
 }
 
-
-
 .infomation-div{
     margin: 2%;
     display: flex;
@@ -24,8 +22,25 @@
     text-align:start;
     color: #747474;;
     white-space: nowrap;
+    margin-right: 1rem;
    
-   
+}
+.export-btn{
+    width: 120px;
+    height: 30px;
+    text-align: center; line-height: 0.2rem;
+    background-color: #dbdbdb;
+    border-style:none;
+    border-radius: 0.5em;
+    color: black;
+    font-size: 1rem;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+
+}
+.export-btn:hover{
+    background-color:#bdbdbd ;
 }
 
 .envite-button{
@@ -35,7 +50,6 @@
     border-style:none;
     border-radius: 0.5em;
     background-color: #ce0000;
-;
     border-width: 0.05em;
     padding: 1rem;
     font-weight: bolder;

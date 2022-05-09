@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
+/* @media screen and (min-width: 30em) and (max-width:80em) {
+ 
+  .chat-container{
+    
+    background-color: rgb(227, 243, 227);
+    
+    
+   
+  }
+  
+  
+} */
+
 .message-container{
 
   overflow-y:auto;
+  margin-bottom: 1rem;
  
 }
 h1{
@@ -15,29 +29,35 @@ h1{
   border-radius: 1rem;
   align-items: center;
   justify-content:center;
-  margin-top: 1rem;
+  margin-top: 1.3rem;
   float: right;
   background-color: var(--blue-scheme);
   color: white;
-  padding: 0.1rem;
+  padding: 0.2rem;
   font-size: small;
-  
- 
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+
 }
 
 
 .blue{
- background-color: #ddecfb;
+ background-color: #0079f3;
 
 }
 .green{
-background-color:  #ddfbea;
+background-color:  #00a000;
+}
+.green-bubble{
+  background-color: #c7efc7;
 }
 .yellow{
-  background-color:  #f8ffdb;
+  background-color:  #ffcc00;
+}
+.yellow-bubble{
+ background-color: #faffba;
 }
 .red{
-  background-color:  #ffdbdb;
+  background-color:  #e20202;
 }
 .currentUser{
   float: right;
@@ -55,14 +75,16 @@ background-color:  #ddfbea;
     width: fit-content;
     max-width: 30rem;
     /* background-color: #ddecfb; */
-    background-color:  #ddfbea;
-    /* background-color:  #f8ffdb; */
-    /* background-color:  #ffdbdb; */
+    /* background-color:  #ddfbea; */
+    /* background-color:  #f8ffdb;
+    background-color:  #ffdbdb; */
     border-radius: 0.4em;
     text-align:start;
+    font-size: medium;
+    font-weight: bold;
     word-wrap: break-word;
     color:#141414;
-    padding:0.4em;
+    padding:0.6em;
     /* font-weight: bold; */
     box-shadow: 1px 1px 1px rgba(212, 211, 211, 0.5);
     
@@ -77,6 +99,8 @@ background-color:  #ddfbea;
   min-width: 400px;
   display: flex;
   flex-direction: row;
+  align-content: center;
+  
 }
 .seperator{
   border-bottom-style: dashed;
@@ -94,8 +118,9 @@ background-color:  #ddfbea;
   }
   
   .form-container {
-    width: 50%;
+    width: 44%;
     min-width: 400px;
+    max-width: 50%;
     /* margin: 0 auto; */
     border-right: 3px solid rgb(207, 205, 205);
   }
@@ -132,7 +157,8 @@ background-color:  #ddfbea;
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
-    font-size: smaller;
+    font-size: medium;
+    font-weight: bolder;
   }
   
   input[type="radio"]:checked + span {
@@ -146,7 +172,7 @@ background-color:  #ddfbea;
     cursor: pointer;
   }
   
-  textarea {
+  .text-area {
     resize: none;
     font-family: Georgia, "Times New Roman", Times, serif;
     min-width: 75%;
@@ -155,32 +181,49 @@ background-color:  #ddfbea;
     border-radius: 3%;
     border: 2px solid #e6e3e3;
     color:#747474;
+    font-size: medium;
   }
   textarea:focus {
   
-    box-shadow: 0 0 3px #d1d1d1;
+    box-shadow: 0 0 3px #efefef;
     outline-offset: 0px;
     outline: none;
+    
   }
   .text-area {
     max-width: 370px;
     
   }
+  #about-field{
+    resize: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-color: #f8f8f882;
+    border-radius: 3%;
+    border: 2px solid #e6e3e3;
+
+    font-size: medium;
+    align-self: center;
+    text-overflow: inherit;
+    margin: 1rem;
+
+  }
   .message-header{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     
   }
   b,h4{
   
   margin-right: 1rem;
   font-size: large;
+  text-shadow: 0 0 black;
   }
   .time{
     display: flex;
     justify-items:baseline;
-    justify-content: end;
-    margin-top: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.7rem;
+    margin-left: 10rem;
     font-size: 0.5rem;
     padding: 0.1rem;
   }
@@ -194,12 +237,15 @@ background-color:  #ddfbea;
     padding: 1rem;
     color: white;
     cursor: pointer;
+    font-size: medium;
+  
   
   }
 
   .sub-text{
-    font-size: smaller;
+    font-size: medium;
     color: #5a5a5a;
+   
   }
 
   .login-form{
@@ -208,7 +254,7 @@ background-color:  #ddfbea;
     flex-direction: column;
   }
 
-  .create-header{
+  .create-header, .invite-form-container{
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -216,11 +262,13 @@ background-color:  #ddfbea;
     margin-top: 5rem;
     
   }
-  fieldset, .login-container, .guest-form-container{
+  fieldset, .login-container, .guest-form-container, .invite-form-container{
     border-width: 0.2em;
     border-radius: 5%;
     border-style: solid;
     border-color: rgb(183, 4, 4);
+    box-shadow: 10px 5px 5px rgb(192, 192, 192);
+    max-width: 50vh;
    
   }
   .login-container{
@@ -231,18 +279,31 @@ background-color:  #ddfbea;
   .form-main>fieldset{
     display: flex;
     flex-direction: column;
-    padding:2rem;
+    justify-content:space-around;
+    padding:1.5rem;
+    align-items: center;
+    
   }
-  .input-create, .login-email-input{
+  .input-create, .login-email-input, .invite-input{
     padding:1rem;
     border-style: solid;
-    border-radius:2em;
+    border-color: white;
+    border-radius:0.5em;
+    margin-top: 0.5rem;
    font-size: larger;
+   background-color: rgb(232, 240, 254);
+  }
+  .input-create:hover{
+   opacity: 0.8;
+  }
+  .home-input{
+    width:25rem;
+    text-align: center;
   }
   .login-email-input{
     margin-bottom: 1rem;
   }
-  .primary-btn, .input-sound, .confirm-btn{
+  .primary-btn, .input-sound, .confirm-btn,.invite-btn{
     text-align: center; 
     line-height: 0.2rem;
     border-style:none;
@@ -253,11 +314,32 @@ background-color:  #ddfbea;
     color: white;
     cursor: pointer;
     font-size: larger;
-    margin:0.5rem
+    margin:0.5rem;
+    align-self: center;
+  }
+  .about-venture-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    
+  }
+  .about-venture-limit{
+    margin-top: 0rem;
+  }
+
+  .primary-btn:hover, .input-sound:hover, .confirm-btn:hover,.invite-btn:hover{
+    background-color:  rgba(199, 5, 5, 0.849);
+  }
+
+  .cancel-record-btn{
+    text-align: center;
+    padding: 0.4rem;
+    margin-bottom: 1rem;
   }
   .record-label{
     font-weight: bold;
     padding: 0.5rem;
+    align-self: center;
   }
   .login-head{
     align-self: center;
@@ -267,7 +349,6 @@ background-color:  #ddfbea;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    
     
   }
 
@@ -279,4 +360,15 @@ background-color:  #ddfbea;
     font-size: 1.5rem;
     text-align: center;
   }
- 
+
+  .invite-form{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+   
+  }
+  .invite-input{
+    margin-top: 1rem;
+  }
+  
+  

@@ -1,14 +1,23 @@
 .App {
-  
+  margin:0;
   display: flex;
   flex-direction: column;
   /* margin-right: 10rem; */
-  padding: 2rem;
+  padding: 0;
   align-items: center;
   min-width: fit-content;
  
   
 }
+/* .logout-btn{
+  color: black;
+  background-color: none;
+  border-style: none;
+  font-size: large;
+  font-style: italic;
+  font-weight: 00;
+  margin-left: 2rem;
+} */
 
 .main-header{
   display: flex;
@@ -18,14 +27,15 @@
   font-weight: bold;
   font-size: larger;
   font-style: italic;
-  margin-right: auto;
+  margin:0;
   background-color: rgb(243, 243, 243);
   width: 100%;
+  height: 6em;
   /* margin-bottom: 2rem; */
 }
 
 #logo{
-  width: 80px;
+  width: 6rem;
  
 }
 

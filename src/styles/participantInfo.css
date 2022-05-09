@@ -4,7 +4,6 @@
     --error: #ff4a4a;
   }
   
-
 .main-div-participantInfo{
     
        /* margin: 50%; */
@@ -12,17 +11,26 @@
        display: flex;
        justify-content: center;
        align-items: center;
-   
-      
-
 }
 .user-name{
   font-size: large;
+
   font-weight: bold;
   color: #2b2b2b;
 }
 audio{
-  display: none;
+  margin: 1rem;
+}
+audio::-webkit-media-controls-play-button,
+     audio::-webkit-media-controls-panel {
+     background-color: rgba(232, 240, 254, 0.664);
+     color: #000;
+     }
+.cancel-recording-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
 }
 .profile-icon{
   display: flex;
@@ -36,26 +44,13 @@ audio{
   font-size: larger;
   margin-right: 0.5rem;
   float: left;
-  background-color: var(--blue-scheme);
+  /* background-color: var(--blue-scheme); */
   color: white;
   padding: 0.1rem;
   align-items: center;
   
-  
 }
-.blue{
-  background-color: #0080ff;
- 
- }
- .green{
- background-color:  green;
- }
- .yellow{
-   background-color:  #ffe608;
- }
- .red{
-   background-color:  #ce0000;
- }
+
 
 .participant-image-div{
     display: block;
@@ -65,14 +60,12 @@ audio{
     height: 2.5rem;
     background-color: #4e4e4e;
     /* margin-left: 100%; */
-
     border: 1px solid var(--primary);
     border-radius: 50%;
     /* margin: 0.0001 rem auto; */
     line-height: 30px;
     color: var(--primary);
     text-align: center;
-  
     font-size: 24px;
  
 }
@@ -107,9 +100,6 @@ audio{
     width: 2.3rem;
     height: 2.3rem;
 }
-
-
-
 .output{
     height: 60px;
     font-size: 0.8rem;

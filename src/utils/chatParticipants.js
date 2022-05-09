@@ -1,4 +1,4 @@
-const url = 'http://localhost:8800';
+const url= 'https://venturechat.herokuapp.com';
 
 export const getParticipantsInThread = async (ventureID) => {
 
@@ -6,11 +6,8 @@ export const getParticipantsInThread = async (ventureID) => {
     // const ventureId = ventureID.split(' ');
     const ventureId = ventureID;
 
-    if(ventureId.length === 1){
-        loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`
-    } else{
-        loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`;
-    }
+    loginUrl = `${url}/api/v1/participants/getAllParticipants/${ventureId}`
+   
        
     const data = await fetch(loginUrl, {
         method: "GET",
@@ -64,3 +61,4 @@ export const newParticipant = async (ventureId, guestEmail, name) =>{
     console.log(data);
     return data;
 }
+

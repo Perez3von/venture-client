@@ -1,70 +1,83 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getParticipantsInThread } from "../utils/chatParticipants";
 import { getUserProfile } from "../utils/api";
-import { setStorage, setStorageEmail } from "../utils/localStorage";
+import { setStorage, setStorageEmail,getStorage } from "../utils/localStorage";
 export default function LoginForm(props){
 const {state} = useLocation();
-console.log(state)
 const [ventureId, setVentureId] = useState(null);
-const [userEmail, setUserEmail] = useState('')
-const [access, setAccess] = useState(false)
+const [userEmail, setUserEmail] = useState('');
+const [userEmailConfirm, setUserEmailConfirm] = useState('')
 const navigate = useNavigate();
 
 useEffect(()=>{
-    try {
-            console.log(ventureId)
-            setVentureId(state.ventureId)
-    
-    } catch (error) {
-       console.log(error)
-        
+    const user = getStorage('EMAIL');
+    //if user is already logged then take to home or if state contains venture, take to venture
+
+    if(user.length !== 0 && state.ventureId === null){
+        navigate('/')
     }
-    
-},[ventureId])
-//,state.ventureId
+});
 
 const verifyUser = async (e) =>{
+    
     e.preventDefault();
-    try {
-        const participants = await getParticipantsInThread(ventureId);
-        const user = await getUserProfile(userEmail);
-        if(user){
-            setStorage('USER', user.fname );
-            setStorageEmail('EMAIL', userEmail);
-        }
-        for(let i = 0; i < participants.length; i++){
-       
-            if(user.user_email === participants[i].user_email){
-                setAccess(true);
-                navigate(`/chatroom/${ventureId}`);
-            }
-        }
-        
-          
-    } catch (error) {
-        alert('You do not have access to this chat or you are not a user.');
-        console.log(error);
+    if(userEmail === userEmailConfirm){
+            try {
+                setVentureId(state.ventureId)
+                const user = await getUserProfile(userEmail);
+                console.log('The USER', user)
+                console.log(ventureId)
+                if(user && state !== null){
+                    
+                    const participants = await getParticipantsInThread(state.ventureId);
+                    console.log('the parts', participants,'USer', user, 'State', state)
+                    participants.forEach(person => {
+                        if(user.user_email === person.user_email){
+                                setStorage('USER', user.fname);
+                                setStorageEmail('EMAIL', user.user_email);
+                                navigate(`/chatroom/${state.ventureId}`);
+                        }
+                    })
+                }
+                else if(user){
+                    setStorage('USER', user.fname);
+                    setStorageEmail('EMAIL', userEmail);
+                    navigate(`/`);
+
+                }
+                  
+        } catch (error) {
+            alert('You do not have access to this chat or you are not a user.');
+            console.log(error);
+        } 
     }
+    else{
+        alert('Emails need to match');
+    }
+   
 }
 
 function handleChange(e){
 
-    setUserEmail(e);
+    setUserEmail(e.toLowerCase());
+}
+function handleChangeConfirm(e){
+
+    setUserEmailConfirm(e.toLowerCase());
 }
 
     return(
         
         <div className="login-container">
             
-            <section>
-                
-                {/* <span>You are requesting to access:{ ventureName }</span> */}
-                {/* <span>Host:{ host }</span> */}
-            </section>
+            {/* <section>
+                {state.ventureId? <h2>Access Venture: {ventureId.split('-')[0]}</h2> : <></>}
+            </section> */}
             <section className="login-form">
                 <h1 className="login-head">Login</h1>
-                 <input type="email" className="login-email-input" placeholder="Enter your email" onChange={(event)=> handleChange(event.target.value)}/>
+                 <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={(event)=> handleChange(event.target.value)}/>
+                 <input type="email" required className="login-email-input" placeholder="Confirm your email" onChange={(event)=> handleChangeConfirm(event.target.value)}/>
                  <button className="confirm-btn" onClick={verifyUser}>Confirm</button>
             </section>
           
