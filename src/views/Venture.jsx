@@ -18,6 +18,7 @@ export default function Venture(){
     const [ventureName, setVentureName] = useState('')
     const [messages, setMessage] = useState([]);
     const [loading, setLoading] = useState(true)
+    const [ventureBio, setVentureBio] = useState('');
     const [user, setUser] = useState(null);
     const [infoParticipants, setInfotParticipants] = useState([]);
     const [userSetting, setUserSettings] = useState({});
@@ -41,6 +42,7 @@ export default function Venture(){
                     console.log(msg.chat)
                     const data = await getVentureData(id);
                     setVentureName(data.venture_name);
+                    setVentureBio(data.venture_bio);
         
                     if(msg === false){
                         alert('This chat does not exist');
@@ -164,6 +166,7 @@ export default function Venture(){
               chat = {messages}
               user={user}
               infoParticipants = {infoParticipants}
+              ventureBio = {ventureBio}
               userSetting = {userSetting}
               
               />
