@@ -65,10 +65,10 @@ export default function MessageForm({handleChange, submitMessage, handleTextChan
 
             </section>
 
-            <section className="text-area">
+            <section className="text-area-chat">
                 <ul> 
                     <header><h4><b> My thoughts... </b></h4></header>
-                    <textarea onChange={(event) => handleTextChange(event.target.value)  } name="thoughts" id="999"  rows="10" maxLength="500" wrap="hard"></textarea>
+                    <textarea onChange={(event) => handleTextChange(event.target.value)  } name="thoughts" id="my-thoughts" className='text-area' rows="10" maxLength="500" wrap="hard"></textarea>
                     <p className='sub-text'>{dataThree.length}/500 characters</p> 
             </ul>
     
