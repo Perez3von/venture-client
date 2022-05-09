@@ -7,12 +7,14 @@ import {createNewVentureThread} from "../utils/fetchChat.js"
 import { setStorage, getStorage, setStorageEmail } from "../utils/localStorage";
 import CreateVentureLogged from "../components/CreateVentureLogged";
 import { useReactMediaRecorder } from "react-media-recorder";
+
 export default function Home(){
     const [ventureID, setVentureID] = useState(''); 
     const [ventureTitle, setVentureTitle] = useState('');
     const [firstName, setFirstName] = useState('');
     const [hostEmail, setHostEmail] = useState('');
     const [hostSound, setHostSound] = useState('');
+    const [saveSound, setSaveSound] = useState('');
     const [recording, setRecording] = useState(false);
     const [aboutVenture, setAboutVenture] = useState('');
     const [timeId, setTimeId] = useState(0);
@@ -23,6 +25,7 @@ export default function Home(){
         startRecording,
         stopRecording,
         mediaBlobUrl,
+        clearBlobUrl,
     } = useReactMediaRecorder({audio:true})
 
     useEffect(()=>{
@@ -40,14 +43,14 @@ export default function Home(){
 
     const getRecording = {
     
-        beginRecording: function(){
+        beginRecording: async function(){
             setRecording(true);
             startRecording();
             const timer = setTimeout(function() {
                 setRecording(false);
                 stopRecording();
                 setHostSound(mediaBlobUrl);
-                console.log('normal stopping')
+                console.log('normal stopping', mediaBlobUrl)
             }, 31000, 'err')
             console.log('starting')
             console.log('Recording status:', status);
@@ -55,11 +58,33 @@ export default function Home(){
             console.log(timeId)
             
         },
-        cancelRecording: function(){
-            console.log('early stop')   
+        saveRecording: async function(){
+            try {
+                console.log(hostSound)
+                const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
+                console.log(audioBlob)
+                const reader = new FileReader();
+                reader.readAsDataURL(audioBlob)
+                reader.onloadend = () => {
+                    console.log(reader.result);
+                    setSaveSound(reader.result)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+                
+                // console.log(typeof audioBlob, 'audioBlob', audioBlob);
+               
+        } ,
+        deleteRecording: function(){
+            clearBlobUrl();
+        },
+        cancelRecording: async function(){
+             
             clearTimeout(timeId);
             setRecording(false);
             stopRecording();
+            console.log('early stop')  
             setHostSound(mediaBlobUrl);
         }
 
@@ -77,7 +102,7 @@ export default function Home(){
                 ventureName: ventureTitle,
                 firstName:firstName.toLowerCase(),
                 hostEmail:hostEmail.toLowerCase(),
-                hostSound:hostSound,
+                hostSound:saveSound,
                 ventureBio:aboutVenture
             }
             await createNewVentureThread(newVentureObj);

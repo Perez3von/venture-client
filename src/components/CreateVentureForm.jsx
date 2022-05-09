@@ -87,9 +87,8 @@ export default function CreateVentureForm({
                     <p className="about-venture-limit">{aboutVenture.length}/500</p>
 
                     </section>
-                   
-                 
                     
+                   
                     <label className="record-label">Record a venture audio (30 seconds MAX.)
                     </label>
                     {recordingState? 
@@ -114,7 +113,14 @@ export default function CreateVentureForm({
                         > Record </button>
                     }
                     {hostSound !== null && recordingState === false ? 
-                    <audio src={hostSound} controls id="preview-sound"></audio> : <></> }
+                    <section className="audio-container">
+                      <audio src={hostSound} controls id="preview-sound"></audio>
+                      <section className="audio-options">
+                        <button className="input-create" id="save-recording-btn" onClick={getRecording.saveRecording} required>Use this sound</button>
+                        <button className="input-create" onClick={getRecording.deleteRecording}>Delete this sound</button>
+                      </section>
+                      
+                    </section> : <></> }
                     <button type='submit' className='primary-btn'>
                     Join Conversation
                     </button>
