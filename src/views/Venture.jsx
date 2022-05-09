@@ -19,6 +19,7 @@ export default function Venture(){
     const [messages, setMessage] = useState([]);
     const [loading, setLoading] = useState(true)
     const [ventureBio, setVentureBio] = useState('');
+    const [hostAudio, setHostAudio] = useState('');
     const [user, setUser] = useState(null);
     const [infoParticipants, setInfotParticipants] = useState([]);
     const [userSetting, setUserSettings] = useState({});
@@ -43,6 +44,7 @@ export default function Venture(){
                     const data = await getVentureData(id);
                     setVentureName(data.venture_name);
                     setVentureBio(data.venture_bio);
+                    setHostAudio(data.host_audio);
         
                     if(msg === false){
                         alert('This chat does not exist');
@@ -182,6 +184,7 @@ export default function Venture(){
                 dataOne = {formData}
                 dataTwo = {formData2}
                 dataThree = {formData3}
+                hostAudio = {hostAudio}
             />
             <section id='chat' className='chat-container'>
                 <ul>

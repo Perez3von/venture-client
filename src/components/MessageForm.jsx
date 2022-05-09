@@ -1,14 +1,26 @@
+import { useEffect, useState } from 'react'
 import soundBite from '../styles/sound_img.png'
 
-export default function MessageForm({handleChange, submitMessage, handleTextChange, handleChange2, dataOne, dataTwo, dataThree}){
+export default function MessageForm({handleChange, submitMessage, handleTextChange, handleChange2, dataOne, dataTwo, dataThree, hostAudio}){
+const [audi, setAudi] = useState('');
 
-    return(
+useEffect(()=>{
+    if(hostAudio !== ''){
+         const audio = new Audio(hostAudio);
+        setAudi(audio);
+    }
+   
+},[hostAudio]);
+const playSound = ()=>{
+        audi.play();
+}
+return(
 <main className="form-container">
         <form action="">
             <section>
                 <ul>
-                    <h4 className="sound"> Venture Sound Bite <img src ={ soundBite } alt="sound-bite"/></h4>
-                    {/* <h4 className="sound"> Venture Sound Bite 🔊</h4> */}
+                    <h4 className="sound"> Venture Sound Bite <img src ={ soundBite } onClick={playSound} alt="sound-bite"/></h4>
+                    {audi !== ''? <audio src={audi} style={{ display:'none' }}></audio>:<></>}
                     
                 </ul>
             </section>

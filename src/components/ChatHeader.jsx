@@ -46,7 +46,7 @@ function countRemain(chat, user){
     return(
         <>
             <h1>{ventureName}</h1>
-            <h2>{ventureBio}</h2>
+            <h3>Summary: {ventureBio}</h3>
                 <header className='chatHeader'>
                     { 
                         infoParticipants.map( information => {
