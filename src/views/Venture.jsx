@@ -44,8 +44,9 @@ export default function Venture(){
                     const data = await getVentureData(id);
                     setVentureName(data.venture_name);
                     setVentureBio(data.venture_bio);
-                    setHostAudio(data.host_audio);
-        
+                    if(data.host_audio !== null || data.host_audio !== ''){
+                        setHostAudio(data.host_audio);
+                    }
                     if(msg === false){
                         alert('This chat does not exist');
                         navigate('/');
