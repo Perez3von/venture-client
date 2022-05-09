@@ -139,6 +139,7 @@ export default function Home(){
                     getRecording ={getRecording}
                     hostSound ={mediaBlobUrl}
                     recordingState = {recording}
+                    loggedIn = {loggedIn}
                     
 
                 />
@@ -158,6 +159,7 @@ export default function Home(){
                         ventureTitle = {ventureTitle}
                         firstName = {firstName}
                         hostEmail = { hostEmail}
+                        aboutVenture = {aboutVenture}
                         setVentureTitle = {setVentureTitle}
                         setFirstName = {setFirstName}
                         setHostEmail = {setHostEmail}

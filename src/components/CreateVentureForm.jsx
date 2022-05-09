@@ -29,7 +29,8 @@ export default function CreateVentureForm({
             <form className='form-main' onSubmit={handleCreateThreadByHost} >
                 <fieldset>
                     <legend className='legend'>Create your venture</legend>
-                    <h1 className="guest-login-head">What's your idea? 💡</h1>  
+                    <h1 className="guest-login-head">What's your idea? 💡</h1> 
+                     
                     <label htmlFor='firstName'>
                         <input
                         id='firstName'
