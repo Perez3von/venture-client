@@ -58,8 +58,9 @@ export default function Home(){
             console.log(timeId)
             
         },
-        saveRecording: async function(){
+        saveRecording: async function(e){
             try {
+                e.preventDefault();
                 console.log(hostSound)
                 const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
                 console.log(audioBlob)
@@ -76,7 +77,8 @@ export default function Home(){
                 // console.log(typeof audioBlob, 'audioBlob', audioBlob);
                
         } ,
-        deleteRecording: function(){
+        deleteRecording: function(e){
+            e.preventDefault();
             clearBlobUrl();
         },
         cancelRecording: async function(){
