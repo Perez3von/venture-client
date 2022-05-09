@@ -102,7 +102,7 @@ export default function Home(){
                 ventureName: ventureTitle,
                 firstName:firstName.toLowerCase(),
                 hostEmail:hostEmail.toLowerCase(),
-                hostSound:saveSound,
+                hostAudio:saveSound,
                 ventureBio:aboutVenture
             }
             await createNewVentureThread(newVentureObj);
