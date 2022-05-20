@@ -26,7 +26,7 @@ export default function CreateVentureForm({
     return(
 
         <div className='form-containers' >
-            <form className='form-main' onSubmit={handleCreateThreadByHost} >
+            <form className='form-main' onSubmit={handleCreateThreadByHost} autoComplete='off' >
                 <fieldset>
                     <legend className='legend'>Create your venture</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1> 
