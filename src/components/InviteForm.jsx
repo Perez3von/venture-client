@@ -87,9 +87,9 @@ function redirectChat() {
             Invite up to 3 guests!
         </h1>
         <div className="invite-form">
-            <input type="email" className="invite-input" placeholder="Guest #1 Email" onChange={(event)=> handleChange(event.target.value)}/>
-            <input type="email" className="invite-input" placeholder="Guest #2 Email" onChange={(event)=> handleChangeTwo(event.target.value)}/>
-            <input type="email" className="invite-input" placeholder="Guest #3 Email" onChange={(event)=> handleChangeThree(event.target.value)}/>
+            <input type="email" className="invite-input" placeholder="Guest #1 Email"  onChange={(event)=> handleChange(event.target.value)}  role='presentation' autoComplete='off'/>
+            <input type="email" className="invite-input" placeholder="Guest #2 Email" onChange={(event)=> handleChangeTwo(event.target.value)}  role='presentation' autoComplete='off'/>
+            <input type="email" className="invite-input" placeholder="Guest #3 Email" onChange={(event)=> handleChangeThree(event.target.value)}  role='presentation' autoComplete='off'/>
             {sending? <PulseLoader color={"#c70505"} loading={sending} css={override} size={5} />:<button className="invite-input invite-btn" onClick={invite} > Invite! </button>}
         </div>
         

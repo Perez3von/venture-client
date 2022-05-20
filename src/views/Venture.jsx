@@ -96,7 +96,7 @@ export default function Venture(){
     useEffect(()=>{
        
         socket.current.on('getMessage', (data)=>{
-            setMessage(arr =>[...arr, data.myMessage]);
+            setMessage(arr =>[data.myMessage, ...arr ]);
         })
         
     },[id])
