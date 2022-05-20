@@ -51,7 +51,7 @@ export default function Venture(){
                         alert('This chat does not exist');
                         navigate('/');
                     }
-                    setMessage(msg.chat);
+                    setMessage(msg.chat.reverse());
                     
                     const participants = await getParticipantsInThread(id);
                     setInfotParticipants(participants);
