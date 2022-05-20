@@ -26,7 +26,7 @@ export default function CreateVentureForm({
     return(
 
         <div className='form-containers' >
-            <form className='form-main' onSubmit={handleCreateThreadByHost} >
+            <form className='form-main' onSubmit={handleCreateThreadByHost} autoComplete='off'>
                 <fieldset>
                     <legend className='legend'>Create your venture</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1> 
@@ -45,12 +45,14 @@ export default function CreateVentureForm({
                         />
                     </label>
                 
-                    <label htmlFor='hostEmail'>
+                    <label htmlFor='hostEmail' >
                         <input
                         id='hostEmail'
                         required
                         value={hostEmail}
-                        type='text'
+                        role='presentation'
+                        autoComplete='off'
+                        type='email'
                         placeholder='Enter your email'
                         className='input-create home-input'
                           onChange={({ target }) => {
