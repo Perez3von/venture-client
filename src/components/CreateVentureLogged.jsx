@@ -28,7 +28,7 @@ export default function CreateVentureForm({
         <div className='form-containers' >
             <form className='form-main' onSubmit={handleCreateThreadByHost} autoComplete='off' >
                 <fieldset>
-                    <legend className='legend'>Create your venture</legend>
+                    <legend className='legend'>Initiate Brainstorm</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1> 
                     
                     <label htmlFor='ventureTitle'>
@@ -51,7 +51,7 @@ export default function CreateVentureForm({
                     name="about-field" 
                     id="about-field" cols="50" rows="10"
                     wrap="hard" maxLength="500"
-                    placeholder="Write about your idea..." 
+                    placeholder="Context for Brainstorm or Bottleneck" 
                     onChange={({target}) => {
                       setAboutVenture(target.value)
                     }}
@@ -63,7 +63,7 @@ export default function CreateVentureForm({
                     </section>
                     
                    
-                    <label className="record-label">Record a venture audio (30 seconds MAX.)
+                    <label className="record-label">Record venture sound bite (30 seconds MAX.)
                     </label>
                     {recordingState? 
                     <section className="recording-live-container">
