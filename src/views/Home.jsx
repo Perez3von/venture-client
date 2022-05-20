@@ -123,7 +123,7 @@ export default function Home(){
         <section className="landing">
     
             <div className="create-header">
-                <h1>Venture Chat</h1>
+                <h1>50 Ways to Lemonade</h1>
                 
                 <CreateVentureForm 
 
@@ -153,7 +153,7 @@ export default function Home(){
             <section className="landing">
           
                 <div className="create-header">
-                    <h1> Venture Chat </h1>
+                    <h1> 50 Ways to Lemonade </h1>
                     <CreateVentureLogged
                         
                         ventureTitle = {ventureTitle}

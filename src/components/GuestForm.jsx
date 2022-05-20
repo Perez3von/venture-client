@@ -73,10 +73,10 @@ return (
             <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={({target})=>{
                 setGuestEmail(target.value);
             }} />
-            <input type="email" required className="login-email-input" placeholder="Confirmyour email" onChange={({target})=>{
+            <input type="email" required className="login-email-input" placeholder="Confirm your email" onChange={({target})=>{
                 setGuestEmailConfirm(target.value);
             }} />
-            <button className="confirm-btn" onClick={ joinChat }>Join the chat!</button>
+            <button className="confirm-btn" onClick={ joinChat }>Join Brainstorm</button>
         </div>
 
     </section>
