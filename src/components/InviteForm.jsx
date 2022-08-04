@@ -31,8 +31,8 @@ const { state } = useLocation();
 
 
 async function invite(){
-    // const guestUrl = `https://venturechat.netlify.app/guest/${state.ventureId}`;
-    const guestUrl = `http://localhost:3000/guest/${state.ventureId}`;
+    const guestUrl = `https://venturechat.netlify.app/guest/${state.ventureId}`;
+    // const guestUrl = `http://localhost:3000/guest/${state.ventureId}`;
     const title = state.ventureTitle;
     const currUser = getStorage('USER');
 

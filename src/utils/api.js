@@ -1,5 +1,5 @@
-// const URL = 'https://venturechat.herokuapp.com';
-const URL='http://localhost:8800'
+const URL = 'https://venturechat.herokuapp.com';
+// const URL='http://localhost:8800'
 
 export const saveMessage = async (msg, time, ventureId) =>{
 
@@ -115,7 +115,7 @@ export const getUserProfile = async (email) => {
           "Content-Type": "application/json",
         },
        
-        body: JSON.stringify({emails:['perez.evon@gmail.com'], ventureTitle:ventureTitle, username:username, chatroomLink:chatroomLink})
+        body: JSON.stringify({emails:emails, ventureTitle:ventureTitle, username:username, chatroomLink:chatroomLink})
       });
 
       return data;
