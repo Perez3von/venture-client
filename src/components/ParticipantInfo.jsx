@@ -8,7 +8,7 @@ export default function ParticipantInfo({ name, message_remining, color}){
             <div className="infomation-div">
                 
                 <p className="user-name"> {name} </p>
-                <p className="remaining"> {message_remining}/10 remaining </p>
+                <p className="remaining"> {message_remining} /10 remaining </p>
             </div>
         </div>
     )

@@ -11,7 +11,7 @@ const [loading, setLoading] = useState(true);
 
 useEffect(()=>{
 
-    getStorage()
+    getStorage('USER')
         .then(user => setUser(user))
         .catch(error => console.log(error))
         .finally(() =>setLoading(false));

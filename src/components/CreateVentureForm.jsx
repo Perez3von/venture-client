@@ -5,6 +5,7 @@ export default function CreateVentureForm({
     aboutVenture,
     ventureTitle,
     firstName,
+    lastName,
     hostEmail,
     setVentureTitle, 
     setFirstName,
@@ -24,10 +25,15 @@ export default function CreateVentureForm({
 
   
     return(
-
+           
+      <div className="create-header">
+      <h1>50 Ways to Lemonade</h1>
+      
+ 
+ 
         <div className='form-containers' >
             <form className='form-main' onSubmit={handleCreateThreadByHost} autoComplete='off'>
-                <fieldset>
+                <div className="fieldset">
                     <legend className='legend'>Initiate Brainstorm</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1> 
                      
@@ -37,13 +43,37 @@ export default function CreateVentureForm({
                         required
                         value= {firstName}
                         type='text'
-                        placeholder='Enter your first name'
+                        placeholder='First name'
                         className='input-create home-input'
                           onChange={({ target }) => {
                             setFirstName(target.value);
                           }}
                         />
                     </label>
+                    <label htmlFor='lastName'>
+                        <input
+                        id='lastName'
+                       
+                        // value= {firstName}
+                        type='text'
+                        placeholder='Last name'
+                        className='input-create home-input'
+                         
+                        />
+                    </label>
+                    {/* <label htmlFor='lastName'>
+                        <input
+                        id='lastName'
+                        required
+                        value= {lastName}
+                        type='text'
+                        placeholder='Last name'
+                        className='input-create home-input'
+                          onChange={({ target }) => {
+                            setFirstName(target.value);
+                          }}
+                        />
+                    </label> */}
                 
                     <label htmlFor='hostEmail' >
                         <input
@@ -128,11 +158,11 @@ export default function CreateVentureForm({
                     Join Conversation
                     </button>
 
-                </fieldset>
+                </div>
             </form>
 
+      </div>
     </div>
-
 
     )
 }

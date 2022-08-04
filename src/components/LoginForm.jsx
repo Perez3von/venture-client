@@ -14,15 +14,34 @@ useEffect(()=>{
     const user = getStorage('EMAIL');
     //if user is already logged then take to home or if state contains venture, take to venture
 
-    if(user.length !== 0 && state.ventureId === null){
+    if(user.length !== 0 && ventureId === null){
         navigate('/')
     }
 });
+const loginUser = async ()=>{
+    if(userEmail === userEmailConfirm ){
+        try {
+             const user = await getUserProfile(userEmail);
+            console.log('The USER', user)
+            setStorage('USER', user.fname);
+            setStorageEmail('EMAIL', userEmail);
+            navigate(`/brainstorms`);
+            
+        } catch (error) {
+            alert('You are not a user.');
+        }
+     
+}else{
+    alert('Emails need to match');
+}
+
+
+}
 
 const verifyUser = async (e) =>{
     
     e.preventDefault();
-    if(userEmail === userEmailConfirm){
+    if(userEmail === userEmailConfirm ){
             try {
                 setVentureId(state.ventureId)
                 const user = await getUserProfile(userEmail);
@@ -78,7 +97,11 @@ function handleChangeConfirm(e){
                 <h1 className="login-head">Login</h1>
                  <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={(event)=> handleChange(event.target.value)}/>
                  <input type="email" required className="login-email-input" placeholder="Confirm your email" onChange={(event)=> handleChangeConfirm(event.target.value)}/>
-                 <button className="confirm-btn" onClick={verifyUser}>Confirm</button>
+                 {
+                    ventureId===null?<button className="confirm-btn" onClick={loginUser}>Confirm</button>:
+                    <button className="confirm-btn" onClick={verifyUser}>Confirm</button>
+
+                 }
             </section>
           
            

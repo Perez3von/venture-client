@@ -7,7 +7,8 @@ import {createNewVentureThread} from "../utils/fetchChat.js"
 import { setStorage, getStorage, setStorageEmail } from "../utils/localStorage";
 import CreateVentureLogged from "../components/CreateVentureLogged";
 import { useReactMediaRecorder } from "react-media-recorder";
-
+import moment from "moment";
+import uuid from "react-uuid";
 export default function Home(){
     const [ventureID, setVentureID] = useState(''); 
     const [ventureTitle, setVentureTitle] = useState('');
@@ -62,6 +63,7 @@ export default function Home(){
             try {
                 e.preventDefault();
                 console.log(hostSound)
+                console.log('Media Blob', mediaBlobUrl)
                 const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
                 console.log(audioBlob)
                 const reader = new FileReader();
@@ -92,38 +94,63 @@ export default function Home(){
 
     }
   
+function filterName(str){
+
+    str = str.replace(/^\s+|\s+$/g, "").replace(/[0-9]/g, '');
+    return str.replace(/[^a-zA-Z0-9 ]/g, "");
+
+}
+
+function filterTitle(str){
+
+    str = str.replace(/^\s+|\s+$/g, "");
+    return str.replace(/[^a-zA-Z0-9 ]/g, "");
+
+
+}
     const handleCreateThreadByHost = async (event) => {
         event.preventDefault();
-        console.log(ventureID);
+       
+        const name = filterName(firstName);
+        const title = filterTitle(ventureTitle);
+        const uniqueId = uuid();
+        let time = moment().format('LLL');
         try {
-            const ventureId = createVentureThreadID(hostEmail, ventureTitle)
+            const ventureId = createVentureThreadID(hostEmail, title)
             setVentureID(ventureId)
             const newVentureObj = {
-               ventureID: ventureId,
-                ventureTitle: ventureTitle.split(' ').join('').toLowerCase(),
-                ventureName: ventureTitle,
-                firstName:firstName.toLowerCase(),
+               ventureID: uniqueId,
+                ventureTitle: uniqueId,
+                ventureName: title,
+                firstName:name.toLowerCase(),
                 hostEmail:hostEmail.toLowerCase(),
                 hostAudio:saveSound,
-                ventureBio:aboutVenture
+                ventureBio:aboutVenture,
+                creationDate: time,
+                lastUpdated:time
             }
+            
             await createNewVentureThread(newVentureObj);
           
-            setStorage('USER', firstName)
+            setStorage('USER', name)
             setStorageEmail('EMAIL', hostEmail)
-            navigate(`/chatroom/${ventureTitle.split(' ').join('').toLowerCase() + '-' + firstName.toLowerCase()}`)
+            navigate(`/chatroom/${uniqueId}`)
         
         } catch (error) {
-           console.log('Please review your credentials');
+           console.log(error);
         }
     }
-    if(loggedIn === false){
-       return(
-        
-        <section className="landing">
-    
-            <div className="create-header">
-                <h1>50 Ways to Lemonade</h1>
+
+
+
+
+
+
+return(<>
+
+{!loggedIn? 
+           
+           
                 
                 <CreateVentureForm 
 
@@ -143,17 +170,11 @@ export default function Home(){
                     
 
                 />
-            </div>
-        </section>
-    )}
-    
-    else{
-        return(
+         
+        :
         
-            <section className="landing">
           
-                <div className="create-header">
-                    <h1> 50 Ways to Lemonade </h1>
+            
                     <CreateVentureLogged
                         
                         ventureTitle = {ventureTitle}
@@ -169,9 +190,15 @@ export default function Home(){
                         hostSound = {mediaBlobUrl}
                         recordingState = {recording}
                     />
-                </div>
-            </section>
-        )
+           
+           
+        
+        
+        
+        
+        }
 
-    }
+</>)
+
+   
 }

@@ -6,26 +6,25 @@ export function createVentureThreadID(hostEmail, ventureTitle){
 }
 
 export function participantsSettings(currentUser, participants, chat){
+	console.log('helper funtion data', currentUser, participants, chat)
     const colors = ['red', 'green', 'yellow' ];
 	const msgColors = ['#ffdbdb','#ddfbea', '#f8ffdb'];
     let settings = {};
     let c = 0;
 	
-
     	for(let i =0; i < participants.length; i++){
     console.log(currentUser === participants[i].fname.charAt(0).toUpperCase() + participants[i].fname.slice(1).toLowerCase())
     		let className = '';
     		let color = '';
     		if(currentUser === participants[i].fname.charAt(0).toUpperCase() + participants[i].fname.slice(1) ){
     			className = 'currentUser';
-    			color = 'blue'
+    			
     			settings[currentUser] = {
     				class:className,
-    				color:color,
+    				color:'blue',
 					msgColor:'#ddecfb',
 					count:0
-    			}
-    
+    			}  
     		}
     		else{
     
@@ -40,21 +39,18 @@ export function participantsSettings(currentUser, participants, chat){
     			}
     
     			c++;
-    
     		}
-
-		
-	
     	}
-
-		chat.forEach(person => {
+		if(chat.length > 1){
+			chat.forEach(person => {
 			if(settings[person.username]){
 				settings[person.username].count++;
 			}
 		})
+		}
+		
 		console.log(settings)
 		return settings;
-
 }
 
 
@@ -96,3 +92,43 @@ export const recordAudio = async (event, setHostSound) => {
 	}
 
 }
+
+export const handleBrainstorms = (v, a,userEMail)=>{
+	const brainstorms = {
+		myBrainstormsCompleted:new Map(),
+		myBrainstormsActive:new Map(),//new Map()? []
+		invitedBrainstorms:new Map(),//new Map()?
+		archives:new Map()//new Map()?
+	}
+	
+	const seen = new Map();
+	
+	a.forEach((archive)=>{
+		if(archive.archived){
+			seen.set(archive.venture_id, archive );	
+		}
+		
+	});
+	
+	v.forEach((venture, id) =>{
+		if(seen.has(venture.venture_id)){
+			brainstorms.archives.set(`brainstorm${id}`, {...venture, id:`brainstorm${id}`});
+		}
+		else{
+			if(venture.host_email === userEMail){
+				if(venture.active === true){
+				 brainstorms.myBrainstormsActive.set(`brainstorm${id}`, {...venture, id:`brainstorm${id}`});
+				}
+				else{
+				 brainstorms.myBrainstormsCompleted.set(`brainstorm${id}`, {...venture, id:`brainstorm${id}`});
+				}
+				
+			}
+			else{
+				brainstorms.invitedBrainstorms.set(`brainstorm${id}`, {...venture, id:`brainstorm${id}`});
+			}
+		}
+	})
+	
+	return brainstorms;
+	}

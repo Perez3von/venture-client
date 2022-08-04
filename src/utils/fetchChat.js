@@ -1,5 +1,6 @@
 
-const url = 'https://venturechat.herokuapp.com'
+// const url = 'https://venturechat.herokuapp.com'
+const url='http://localhost:8800'
 
 export const createNewVentureThread = async (newVentureObj) => {
     console.log('venture Obj', newVentureObj)

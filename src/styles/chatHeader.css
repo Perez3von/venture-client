@@ -3,7 +3,35 @@
     flex-direction: row;
     margin:5px;
     align-items:flex-start;
+
 }
+.participants-wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    grid-auto-rows: minmax(1rem, auto);
+    align-items: center;
+    
+  }
+  .meta-info{
+
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        grid-auto-rows: minmax(1rem, auto);
+        align-items: center;
+  }
+
+
+  .participants-count{
+    font-weight: bold;
+    color: #747474;
+    font-size: medium;
+    align-self: flex-end;
+    text-align: center;
+   margin-right:10%;
+}
+  
 
 .infomation-div{
     margin: 2%;
@@ -12,58 +40,52 @@
     justify-content: center;
     align-items: baseline;
     
+    
 }
-.participants-count{
-    font-weight: bold;
-    color: #747474;
-}
+
 .remaining{
     margin-left:10px;
     text-align:start;
     color: #747474;;
     white-space: nowrap;
     margin-right: 1rem;
+    font-size: large;
+    font-weight:bold;
    
 }
 .export-btn{
-    width: 120px;
-    height: 30px;
-    text-align: center; line-height: 0.2rem;
-    background-color: #dbdbdb;
-    border-style:none;
-    border-radius: 0.5em;
-    color: black;
-    font-size: 1rem;
-    font-weight: bolder;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
+    display: none;
 
 }
 .export-btn:hover{
-    background-color:#bdbdbd ;
+    
+    box-shadow: 1px 1px 4px 4px rgba(134, 134, 134, 0.432);
+}
+.chatroom-complete-btn{
+display: none;
+    
+}
+.chatroom-complete-btn:hover{
+    box-shadow: 1px 1px 5px 4px rgba(3, 182, 27, 0.432);
+
+}
+.mark-as-complete{
+    filter: brightness(0) invert(1);
+    padding-right: 1rem;
+    padding-left:1rem;
+    
 }
 
 .envite-button{
-    width: 120px;
-    height: 50px;
-    text-align: center; line-height: 0.2rem;
-    border-style:none;
-    border-radius: 0.5em;
-    background-color: #ce0000;
-    border-width: 0.05em;
-    padding: 1rem;
-    font-weight: bolder;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: none;
+}
+.envite-button:hover{
+    box-shadow: 1px 1px 4px 4px rgba(255, 82, 82, 0.568);
 }
 #group-logo{
-    width: 30px;
-}
+    width: 25px;
+    filter: brightness(0) invert(1);
+}           
 
 .envite-noparticipants-div{
     display: flex;
@@ -72,3 +94,156 @@
     justify-content: center;
     align-items: center;
 }
+.participants-count{
+    padding-right:1rem;
+}
+.invite-btn-disable{
+    display: none;
+}
+.completed-brainstorm{
+    cursor: not-allowed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(167, 167, 167);
+    width:50%;
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 10px;
+    padding:1rem;
+    text-indent: 10px;
+    margin-bottom: 2rem;
+    align-self: center;
+    justify-self:auto;
+}
+
+@media only screen and (min-width: 450px) {
+    .completed-brainstorm{
+        cursor: not-allowed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        background-color: rgb(167, 167, 167);
+        width:fit-content;
+        color: white;
+        font-weight: bold;
+        font-size: larger;
+        border-radius: 10px;
+        padding:1rem;
+        text-indent: 10px;
+        margin-bottom: 2rem;
+        align-self: center;
+        justify-self:auto;
+    }
+    .invite-btn-disable{
+        cursor: not-allowed;
+        background-color: #cccccc;
+        margin-top: 5px;
+        width: 120px;
+        height: 50px;
+        text-align: center; line-height: 0.2rem;
+        border-style:none;
+        border-radius: 0.5em;
+        border-width: 0.05em;
+        padding: 1rem;
+        font-weight: bolder;
+        font-size: larger;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+  
+    .envite-button{
+        margin-top: 5px;
+        width: 120px;
+        height: 50px;
+        text-align: center; line-height: 0.2rem;
+        border-style:none;
+        border-radius: 0.5em;
+        background-color: #ce0000;
+        border-width: 0.05em;
+        padding: 1rem;
+        font-weight: bolder;
+        font-size: larger;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .export-btn{
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    height: 30px;
+    text-align: center; line-height: 0.2rem;
+    background-color: #e6e6e6;
+    border-style:1px solid grey;
+    border-radius: 0.5em;
+    color: black;
+    font-size: medium;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    padding:20px
+    }
+    .chatroom-complete-btn{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        background-color: rgb(11, 148, 30);
+        width:fit-content;
+        color: white;
+        font-weight: bold;
+        font-size: larger;
+        border-radius: 10px;
+        padding:1rem;
+        text-indent: 10px;
+        margin-bottom: 2rem;
+        align-self: center;
+        justify-self:auto;
+       
+    }
+
+    
+    .participants-wrapper{
+        display: grid;
+        /* grid-template-columns: 1fr 1fr 1fr 1fr ; */
+        grid-template-columns: 1fr 1fr ;
+        justify-items: left;
+        grid-auto-rows: minmax(1rem, auto);
+        align-items: center;
+        align-self: center;
+
+         
+      }
+      .meta-info{
+
+        /* display: grid;
+        grid-template-columns: 3fr 1fr;
+        justify-items: center;
+        grid-auto-rows: minmax(1rem, auto);
+        align-items: center;
+        */
+        align-self: center;
+  }
+  .participants-count{
+      padding-right:1rem;
+      font-weight: bold;
+      color: #747474;
+      font-size: large;
+      align-self: flex-end;
+      text-align: center;
+     margin-right:auto;
+  }
+
+
+  }

@@ -24,10 +24,11 @@ export default function CreateVentureForm({
 
   
     return(
-
+      <div className="create-header">
+      <h1>50 Ways to Lemonade</h1>
         <div className='form-containers' >
             <form className='form-main' onSubmit={handleCreateThreadByHost} autoComplete='off' >
-                <fieldset>
+                <div className="fieldset">
                     <legend className='legend'>Initiate Brainstorm</legend>
                     <h1 className="guest-login-head">What's your idea? 💡</h1> 
                     
@@ -99,11 +100,11 @@ export default function CreateVentureForm({
                     Join Conversation
                     </button>
 
-                </fieldset>
+                </div>
             </form>
 
     </div>
-
+</div>
 
     )
 }

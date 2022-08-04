@@ -22,16 +22,17 @@ const override = css`
 `;
 const { state } = useLocation();
 
-useEffect(()=>{
-    const user = getStorage('EMAIL');
-    if(user.length === 0 || state === null){
-        navigate('/')
-    }
-})
+// useEffect(()=>{
+//     const user = getStorage('EMAIL');
+//     if(user.length === 0 || state === null){
+//         navigate('/')
+//     }
+// })
 
 
 async function invite(){
-    const guestUrl = `https://venturechat.netlify.app/guest/${state.ventureId}`;
+    // const guestUrl = `https://venturechat.netlify.app/guest/${state.ventureId}`;
+    const guestUrl = `http://localhost:3000/guest/${state.ventureId}`;
     const title = state.ventureTitle;
     const currUser = getStorage('USER');
 
@@ -83,18 +84,23 @@ function redirectChat() {
  return(
 
     <section className="invite-form-container">
-        <h1 className="guest-login-head">
-            Invite up to 3 guests!
-        </h1>
-        <div className="invite-form">
+        <header className="invite-head">
+            <h2 className="">Please invite the participants you'd like to brainstorm with.</h2>
+            <div className="h6"> {`  
+            The thinkspace accommodates 4 brainstormers, so the first 3 that join will be your brainstorming counterparts.`}
+            </div>
+        </header>
+        <div className="invite-form-inputs-container">
             <input type="email" className="invite-input" placeholder="Guest #1 Email"  onChange={(event)=> handleChange(event.target.value)}  role='presentation' autoComplete='off'/>
             <input type="email" className="invite-input" placeholder="Guest #2 Email" onChange={(event)=> handleChangeTwo(event.target.value)}  role='presentation' autoComplete='off'/>
             <input type="email" className="invite-input" placeholder="Guest #3 Email" onChange={(event)=> handleChangeThree(event.target.value)}  role='presentation' autoComplete='off'/>
-            {sending? <PulseLoader color={"#c70505"} loading={sending} css={override} size={5} />:<button className="invite-input invite-btn" onClick={invite} > Invite! </button>}
+           
+            {sending? <PulseLoader color={"#c2e7ff"} loading={sending} css={override} size={3} />:<button className="invite-input invite-btn" onClick={invite} > Invite! </button>}
+            {successSend? <div className="invite-sent-message">Successful send! ✅</div> : <></>}
         </div>
         
-        {successSend? <h3>Successful send! ✅</h3> : <></>}
-        {successSend? <button className='invite-input invite-btn' onClick={redirectChat}>Return to chat</button> : <></>}
+        
+         <button className='invite-input invite-btn' onClick={redirectChat}>Return to chat</button>
     </section>
 
  )

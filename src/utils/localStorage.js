@@ -4,11 +4,15 @@ export function getStorage(KEY){
     return cart;
 }
 export function setStorage(KEY, venture){
-    const user = venture.charAt(0).toUpperCase() + venture.slice(1);
-    localStorage.setItem(KEY, JSON.stringify(user));
+    const userFName = venture.charAt(0).toUpperCase() + venture.slice(1);
+    localStorage.setItem(KEY, JSON.stringify(userFName));
+}
+export function setStorageLastName(KEY, venture){
+    const userLName = venture.charAt(0).toUpperCase() + venture.slice(1);
+    localStorage.setItem(KEY, JSON.stringify(userLName));
 }
 
 export function setStorageEmail(KEY, email){
-    const user = email.toLowerCase();
-    localStorage.setItem(KEY, JSON.stringify(user));
+    const userEmail = email.toLowerCase();
+    localStorage.setItem(KEY, JSON.stringify(userEmail));
 }

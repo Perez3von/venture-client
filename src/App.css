@@ -4,11 +4,14 @@
   flex-direction: column;
   /* margin-right: 10rem; */
   padding: 0;
-  align-items: center;
+  /* align-items: center; */
   min-width: fit-content;
+  background-color: white;
  
-  
 }
+
+
+
 /* .logout-btn{
   color: black;
   background-color: none;
@@ -18,24 +21,102 @@
   font-weight: 00;
   margin-left: 2rem;
 } */
+.main-header-links:hover>img{
 
-.main-header{
+  /* filter: invert(48%) sepia(19%) saturate(3207%) hue-rotate(10deg) brightness(95%) contrast(80%); */
+  filter: opacity(0.5) drop-shadow(0 0 0 red); 
+}
+.main-header-links:hover:not(:last-child){
+  color: rgb(250, 6, 6);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 5px solid red ;
+  
+}
+.main-header-links:hover:last-child{
+  color: rgb(250, 6, 6);
+}
+.logo-wrapper{
+  padding: 1rem;;
+}
+
+.main-header-links{
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 1.9rem;
+  text-align: center;
+ 
+  /* font-weight: bold; */
+  
+  /* border: 1px solid black;
+  border-radius: 15px;
+  padding: 0.5rem; */
+  
+}
+.filler-header{
+  display: block;
+  height: 15px;
+}
+.header-contents{
   display: flex;
   flex-direction: row;
   align-items: center;
-  text-indent: 2rem;
-  font-weight: bold;
-  font-size: larger;
-  font-style: italic;
-  margin:0;
-  background-color: rgb(243, 243, 243);
-  width: 100%;
-  height: 6em;
-  /* margin-bottom: 2rem; */
+ padding-right: 1rem;
+ background-color: #f3f3f3;
+  text-align: center;
+
+  
+  /* border-bottom: 1px solid rgb(134, 134, 134); */
+
+}
+.landing{
+  /* align-self:flex-start; */
+  align-self: center;
 }
 
 #logo{
-  width: 6rem;
+  
+  height: 50px;
  
 }
+.main-header{
+  position: sticky;
+  top: 0;
+  bottom: 0;
+ /* display: flex;
+ flex-direction: row; */
+
+ /* align-items: center; */
+
+ 
+}
+
+@media only screen and (min-width: 450px) {
+  #logo{
+    height: 80px;
+  }
+  .main-header-links{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: x-large;
+    font-weight: bolder;
+    margin-right:auto;
+    margin-left: auto;
+   
+  }
+  .main-header{
+    margin-bottom: 1rem;
+    /* width: auto;
+   */
+  }
+  
+  }
+
 
