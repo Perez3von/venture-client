@@ -71,7 +71,10 @@ export default function Venture(){
 useEffect(()=>{
     let room = id;
     const currentUserEmail = getStorage('EMAIL');
-    socket.current = io('ws://localhost:8900');
+     socket.current = io('https://venturechatsocket.herokuapp.com',{
+            secure:true,
+        });
+    // socket.current = io('ws://localhost:8900');
     // socket.current = io('ws://localhost:8900 ',{
     //     withCredentials: true
     // });
@@ -362,7 +365,8 @@ useEffect(()=>{
             setMsgInfo(message);
             saveMessage(message, time, id);
             userSetting[user].count++;
-            const link = `http://localhost:3000/chatroom/${id}`;
+            // const link = `http://localhost:3000/chatroom/${id}`;
+            const link = `https://venturechat.netlify.app/chatroom/${id}`;
             if(newParticipants !== null){
                 const usersToNotify = newParticipants.filter(person=>!onlineUsers.includes(person.user_email)); 
                 sendNotification(usersToNotify,ventureName, user, link);

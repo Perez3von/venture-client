@@ -21,7 +21,8 @@ const [showCompleted, setShowCompleted] = useState(false);
 const [showArchived, setShowArchived] = useState(false);
 const [loading, setLoading] = useState(true)
 
-const BASE_URL = 'http://localhost:3000/chatroom/'
+// const BASE_URL = 'http://localhost:3000/chatroom/'
+const BASE_URL = 'https://venturechat.netlify.app/chatroom/'
 const override = css`
   display: block;
   margin: 0 auto;

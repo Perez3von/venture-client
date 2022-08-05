@@ -1,5 +1,5 @@
-// const url= 'https://venturechat.herokuapp.com';
-const url='http://localhost:8800'
+const url= 'https://venturechat.herokuapp.com';
+// const url='http://localhost:8800'
 export const getParticipantsInThread = async (ventureID) => {
 
     let loginUrl = ''

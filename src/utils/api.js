@@ -1,5 +1,5 @@
-// const URL = 'https://venturechat.herokuapp.com';
-const URL='http://localhost:8800'
+const URL = 'https://venturechat.herokuapp.com';
+// const URL='http://localhost:8800'
 
 export const saveMessage = async (msg, time, ventureId) =>{
 
