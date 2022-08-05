@@ -29,6 +29,11 @@ audio::-webkit-media-controls-play-button,
 }
 
 
+.home-input{
+  width: 80%;
+ 
+}
+
 
 .participant-image-div{
     display: block;

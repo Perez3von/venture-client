@@ -10,7 +10,9 @@ import logo from '../src/assets/youthCitiesLogo.png';
 import { getStorage } from './utils/localStorage';
 import Brainstorms from './views/Brainstorms';
 import myVenturesIcon from '../src/assets/myVenturesIcon.png'
-import coreIcon from '../src/assets/coreIcon.png'
+import coreIcon from '../src/assets/coreIconClear.png'
+import logoutIcon from '../src/assets/logout.png'
+import logInIcon from '../src/assets/login.png'
 function App() {
   const email = getStorage('EMAIL');
   function logout(){
@@ -30,13 +32,15 @@ function App() {
             Core
             </a>
         
-        {email.length===0? <a href='/login ' className='main-header-links'> Login</a>:
+        {email.length===0? <a href='/login ' className='main-header-links'>
+        <img src={logInIcon} alt='logInIcon' id='logInIcon'/>
+           Login</a>:
         <>
         <a href='/brainstorms '  className='main-header-links' >
         <img src={myVenturesIcon} alt='myVenturesIcon' id='myVenturesIcon'/> 
          myVentures </a>
         <a href='/ ' className='main-header-links' onClick={logout} >
-          <div className='filler-header'></div> Logout </a>
+        <img src={logoutIcon} alt='logoutIcon' id='logoutIcon'/>  Logout </a>
         </>
         }
         </div>

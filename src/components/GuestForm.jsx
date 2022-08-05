@@ -67,9 +67,11 @@ return (
     <section className="guest-form-container">
         <div className="guest-form">
             <h1 className="guest-login-head">Tell us who you are 🙈</h1>
-            <input type="text" required className="login-email-input" placeholder="Enter your name" onChange={({target})=> {
+            <input type="text" required className="login-email-input" placeholder="Enter your first name" onChange={({target})=> {
                 setGuestName(target.value);
             }} />
+            <input type="text" required className="login-email-input" placeholder="Enter your last name" />
+            
             <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={({target})=>{
                 setGuestEmail(target.value);
             }} />

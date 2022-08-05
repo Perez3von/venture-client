@@ -16,10 +16,11 @@ export default function Home(){
     const [hostEmail, setHostEmail] = useState('');
     const [hostSound, setHostSound] = useState('');
     const [saveSound, setSaveSound] = useState('');
+    const [recordingSaved, setRecordingSaved] = useState(false);
     const [recording, setRecording] = useState(false);
     const [aboutVenture, setAboutVenture] = useState('');
     const [timeId, setTimeId] = useState(0);
-    const [loggedIn, setLogged] = useState(false)
+    const [loggedIn, setLogged] = useState(false);
     const navigate = useNavigate();
     const {
         status,
@@ -56,7 +57,7 @@ export default function Home(){
             console.log('starting')
             console.log('Recording status:', status);
             setTimeId(timer)
-            console.log(timeId)
+            console.log(timeId, ventureID)
             
         },
         saveRecording: async function(e){
@@ -70,7 +71,8 @@ export default function Home(){
                 reader.readAsDataURL(audioBlob)
                 reader.onloadend = () => {
                     console.log(reader.result);
-                    setSaveSound(reader.result)
+                    setSaveSound(reader.result);
+                    setRecordingSaved(true);
                 }
             } catch (error) {
                 console.log(error)
@@ -81,6 +83,7 @@ export default function Home(){
         } ,
         deleteRecording: function(e){
             e.preventDefault();
+            setRecordingSaved(false);
             clearBlobUrl();
         },
         cancelRecording: async function(){
@@ -134,7 +137,8 @@ function filterTitle(str){
           
             setStorage('USER', name)
             setStorageEmail('EMAIL', hostEmail)
-            navigate(`/chatroom/${uniqueId}`)
+            // navigate(`/chatroom/${uniqueId}`)
+            navigate(`/brainstorms`)
         
         } catch (error) {
            console.log(error);
@@ -143,60 +147,47 @@ function filterTitle(str){
 
 
 
-
-
-
 return(<>
 
 {!loggedIn? 
            
-           
+        <CreateVentureForm 
+
+            ventureTitle = {ventureTitle}
+            firstName = {firstName}
+            hostEmail = {hostEmail}
+            aboutVenture = {aboutVenture}
+            setVentureTitle = {setVentureTitle}
+            setFirstName = {setFirstName}
+            setHostEmail = {setHostEmail}
+            setAboutVenture = {setAboutVenture}
+            handleCreateThreadByHost = {handleCreateThreadByHost}
+            getRecording ={getRecording}
+            hostSound ={mediaBlobUrl}
+            recordingState = {recording}
+            loggedIn = {loggedIn}
+            recordingSaved={recordingSaved }
+
+        />:
+
+            <CreateVentureLogged
                 
-                <CreateVentureForm 
+                ventureTitle = {ventureTitle}
+                firstName = {firstName}
+                hostEmail = { hostEmail}
+                aboutVenture = {aboutVenture}
+                setVentureTitle = {setVentureTitle}
+                setFirstName = {setFirstName}
+                setHostEmail = {setHostEmail}
+                setAboutVenture = {setAboutVenture}
+                handleCreateThreadByHost = {handleCreateThreadByHost}
+                getRecording = {getRecording}
+                hostSound = {mediaBlobUrl}
+                recordingState = {recording}
+                recordingSaved={recordingSaved }
+            />
 
-                    ventureTitle = {ventureTitle}
-                    firstName = {firstName}
-                    hostEmail = {hostEmail}
-                    aboutVenture = {aboutVenture}
-                    setVentureTitle = {setVentureTitle}
-                    setFirstName = {setFirstName}
-                    setHostEmail = {setHostEmail}
-                    setAboutVenture = {setAboutVenture}
-                    handleCreateThreadByHost = {handleCreateThreadByHost}
-                    getRecording ={getRecording}
-                    hostSound ={mediaBlobUrl}
-                    recordingState = {recording}
-                    loggedIn = {loggedIn}
-                    
-
-                />
-         
-        :
-        
-          
-            
-                    <CreateVentureLogged
-                        
-                        ventureTitle = {ventureTitle}
-                        firstName = {firstName}
-                        hostEmail = { hostEmail}
-                        aboutVenture = {aboutVenture}
-                        setVentureTitle = {setVentureTitle}
-                        setFirstName = {setFirstName}
-                        setHostEmail = {setHostEmail}
-                        setAboutVenture = {setAboutVenture}
-                        handleCreateThreadByHost = {handleCreateThreadByHost}
-                        getRecording = {getRecording}
-                        hostSound = {mediaBlobUrl}
-                        recordingState = {recording}
-                    />
-           
-           
-        
-        
-        
-        
-        }
+}
 
 </>)
 

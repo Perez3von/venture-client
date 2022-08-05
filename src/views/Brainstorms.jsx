@@ -20,7 +20,7 @@ const [update, setUpdate] = useState('false');
 const [showCompleted, setShowCompleted] = useState(false);
 const [showArchived, setShowArchived] = useState(false);
 const [loading, setLoading] = useState(true)
-const curr_user = 'perez'
+
 const BASE_URL = 'http://localhost:3000/chatroom/'
 const override = css`
   display: block;
@@ -28,6 +28,11 @@ const override = css`
   border: none;
 `;
 
+
+
+useEffect(()=>{
+    setLoading(true);
+    
 const getBrainstormData = async()=>{
     const userEmail = getStorage('EMAIL');
     try {
@@ -43,13 +48,10 @@ const getBrainstormData = async()=>{
     
     } catch (error) {
         console.log(error);
+        // console.log(update)
     }  
 }
 
-
-
-useEffect(()=>{
-    setLoading(true)
     getBrainstormData();
 },[])
 
@@ -125,7 +127,7 @@ async function archiveBrainstorm(e){
         await updateArchivesAPI(userEmail, y.venture_id);
     }
     setUpdate(Date.now())
-    
+    console.log(update)
 //api call to add to archive
 }
 

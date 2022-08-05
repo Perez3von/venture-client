@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getParticipantsInThread } from "../utils/chatParticipants";
 import { getUserProfile } from "../utils/api";
 import { setStorage, setStorageEmail,getStorage } from "../utils/localStorage";
+import loginIcon from '../assets/emailIcon.png'
 export default function LoginForm(props){
 const {state} = useLocation();
 const [ventureId, setVentureId] = useState(null);
@@ -94,12 +95,14 @@ function handleChangeConfirm(e){
                 {state.ventureId? <h2>Access Venture: {ventureId.split('-')[0]}</h2> : <></>}
             </section> */}
             <section className="login-form">
-                <h1 className="login-head">Login</h1>
+                <h1 className="login-head">
+                <img src={loginIcon} alt='loginIcon' id='loginIcon'/>
+                    Login Form</h1>
                  <input type="email" required className="login-email-input" placeholder="Enter your email" onChange={(event)=> handleChange(event.target.value)}/>
                  <input type="email" required className="login-email-input" placeholder="Confirm your email" onChange={(event)=> handleChangeConfirm(event.target.value)}/>
                  {
-                    ventureId===null?<button className="confirm-btn" onClick={loginUser}>Confirm</button>:
-                    <button className="confirm-btn" onClick={verifyUser}>Confirm</button>
+                    ventureId===null?<button className="confirm-btn" onClick={loginUser}>Login</button>:
+                    <button className="confirm-btn" onClick={verifyUser}>Login</button>
 
                  }
             </section>

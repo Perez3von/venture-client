@@ -1,8 +1,8 @@
-import archiveIcon from '../assets/archive.png'
+
 import deleteIcon from '../assets/trash.png'
 import moment from 'moment'
 import undoIcon from '../assets/unarchive.png'
-import { getStorage } from '../utils/localStorage'
+
 export default function Archives({brainstorms, deleteFn, undoFn, showArchived, url, userEmail}){
     
     return(

@@ -41,9 +41,11 @@ export function participantsSettings(currentUser, participants, chat){
     			c++;
     		}
     	}
-		if(chat.length > 1){
+		console.log('CHAT',chat)
+		if(chat){
 			chat.forEach(person => {
 			if(settings[person.username]){
+				// console.log('PERSON', settings[person.username].count++)
 				settings[person.username].count++;
 			}
 		})

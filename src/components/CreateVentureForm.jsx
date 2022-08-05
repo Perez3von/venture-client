@@ -6,6 +6,7 @@ export default function CreateVentureForm({
     ventureTitle,
     firstName,
     lastName,
+    recordingSaved,
     hostEmail,
     setVentureTitle, 
     setFirstName,
@@ -145,15 +146,21 @@ export default function CreateVentureForm({
                         onClick={ getRecording.beginRecording }
                         > Record </button>
                     }
+                    
                     {hostSound !== null && recordingState === false ? 
-                    <section className="audio-container">
+                      <section className="audio-container">
                       <audio src={hostSound} controls id="preview-sound"></audio>
                       <section className="audio-options">
-                        <button className="input-create" id="save-recording-btn" onClick={getRecording.saveRecording} required>Use this sound</button>
-                        <button className="input-create" onClick={getRecording.deleteRecording}>Delete this sound</button>
+                        {
+                          recordingSaved?<p>Audio saved</p>:
+                            <button className="input-create" id="save-recording-btn" onClick={getRecording.saveRecording} required>Use this sound</button>
+                        }
+                         <button className="input-create" onClick={getRecording.deleteRecording}>Delete this sound</button>
+
                       </section>
                       
-                    </section> : <></> }
+                    </section> 
+                    : <></> }
                     <button type='submit' className='primary-btn'>
                     Join Conversation
                     </button>

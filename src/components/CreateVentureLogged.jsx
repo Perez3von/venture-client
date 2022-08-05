@@ -9,6 +9,7 @@ export default function CreateVentureForm({
     setVentureTitle, 
     setFirstName,
     setHostEmail,
+    recordingSaved,
     setAboutVenture,
     handleCreateThreadByHost,
     hostSound,
@@ -91,8 +92,12 @@ export default function CreateVentureForm({
                     <section className="audio-container">
                       <audio src={hostSound} controls id="preview-sound"></audio>
                       <section className="audio-options">
-                        <button className="input-create" id="save-recording-btn" onClick={getRecording.saveRecording} required>Use this sound</button>
-                        <button className="input-create" onClick={getRecording.deleteRecording}>Delete this sound</button>
+                        {
+                          recordingSaved?<p>Audio saved</p>:
+                            <button className="input-create" id="save-recording-btn" onClick={getRecording.saveRecording} required>Use this sound</button>
+                        }
+                         <button className="input-create" onClick={getRecording.deleteRecording}>Delete this sound</button>
+
                       </section>
                       
                     </section> : <></> }

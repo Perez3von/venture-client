@@ -16,8 +16,7 @@ import inviteIcon from '../assets/inviteIcon.png'
 import { ClipLoader } from "react-spinners";
 import thumbsUp from '../assets/thumbsUp.png'
 import { exportVentureChat } from "../utils/api";
-import { PulseLoader } from "react-spinners";
-import { css } from "@emotion/react";
+// import { css } from "@emotion/react";
 
 
 
@@ -30,7 +29,7 @@ export default function Venture(){
     const [msgInfo, setMsgInfo] = useState('');
     const [ventureName, setVentureName] = useState('');
     const [ventureOwner, setVentureOwner] = useState('')
-    const [messages, setMessage] = useState([]);
+    const [messages, setMessage] = useState(null);
     const [loading, setLoading] = useState(true);
     const [ventureBio, setVentureBio] = useState('');
     const [hostAudio, setHostAudio] = useState('');
@@ -43,39 +42,36 @@ export default function Venture(){
     const [messageForm, setMessageForm] = useState(true);
     const [exportChat, setExportChat] = useState(false);
     const[successExport, setSuccessExport] = useState(false);
-    const [userJoin, setUserJoin] = useState(null);
+    // const [userJoin, setUserJoin] = useState(null);
     const [newParticipants, setNewParticipants] = useState(null)
     const socket = useRef();
     const {id} = useParams();
     const navigate = useNavigate();
-    const [secondLoading, setSecondLoading] = useState(false);
-    const override = css`
-    display: block;
-    margin: 0 auto;
-    border: none;
-    `;
+    // const [secondLoading, setSecondLoading] = useState(false);
+    // const override = css`
+    // display: block;
+    // margin: 0 auto;
+    // border: none;
+    // `;
 
    
 
 
-useEffect(()=>{
-    const mq = window.matchMedia( "(min-width: 500px)" );
-    if (mq.matches) {
-            setMessageForm(true);
-            setShowChat(true)
-        } else {
-        setMessageForm(false);
-    }
-},[])
+// useEffect(()=>{
+//     const mq = window.matchMedia( "(min-width: 500px)" );
+//     if (mq.matches) {
+//             setMessageForm(true);
+//             setShowChat(true)
+//         } else {
+//         setMessageForm(false);
+//     }
+// },[])
 
 
 useEffect(()=>{
     let room = id;
     const currentUserEmail = getStorage('EMAIL');
-    socket.current = io('https://venturechatsocket.herokuapp.com',{
-        secure:true,
-    });
-    // socket.current = io('ws://localhost:8900');
+    socket.current = io('ws://localhost:8900');
     // socket.current = io('ws://localhost:8900 ',{
     //     withCredentials: true
     // });
@@ -88,6 +84,13 @@ useEffect(()=>{
 useEffect(()=> {
 
         setLoading(true);
+        const mq = window.matchMedia( "(min-width: 500px)" );
+        if (mq.matches) {
+                setMessageForm(true);
+                setShowChat(true)
+            } else {
+            setMessageForm(false);
+        }
         const currentUser = getStorage('USER');
         const currentUserEmail = getStorage('EMAIL');
         // let username = currentUser;
@@ -110,7 +113,7 @@ useEffect(()=> {
                     // tempPart=participants;
                     console.log("DATA", participants, data, "messags", brainstorm)
                     const settings =  participantsSettings(currentUser, participants, brainstorm);
-    
+                    socket.current.emit('userOnline', {info:participants});
                     let canAccess = false;
 
                     for(let i = 0; i < participants.length; i++){
@@ -127,6 +130,8 @@ useEffect(()=> {
                     if(data.host_audio !== null || data.host_audio !== ''){
                         setHostAudio(data.host_audio);
                     }
+
+                    
                     setIsActive(data.active)
                     setVentureOwner(data.host_email);
                     setUser(currentUser);
@@ -159,33 +164,39 @@ useEffect(()=> {
         //         room: room,
         //         people:currentUserEmail
         //      });
-    },[id, navigate, userJoin]);
+    },[id, navigate]);
 
 useEffect(()=>{
-    if(!loading){
-        setSecondLoading(true);
-        const updateGuests = async() =>{
+   
+   
+        const updateGuests = async(list) =>{
             const currentUser = getStorage('USER');
-            const participants = await getParticipantsInThread(id);
-            console.log('promise', participants)
+           
             
-            const settings =  participantsSettings(currentUser, participants, messages);
-            console.log('new settings:', settings)
-            if(participants.length !== infoParticipants.length){
+            if(list.length !== infoParticipants.length){  
+                // let msgs = await getMessages(id);
+                // console.log('sHOULD BE MSGS', msgs)
+                const participants = await getParticipantsInThread(id);
+                console.log('promise', participants)
+            
+                const settings =  participantsSettings(currentUser, participants, messages);
+                console.log('new settings:', settings)
+               
                  setNewParticipants(participants);
                 setUserSettings(settings)
             }
-            setSecondLoading(false)
+         
            
         }
-         socket.current.on('usersOnline', (data)=>{
+        if(!loading)
+         socket.current.on('usersOnlineData', (data)=>{
        
         // const bool = infoParticipants.every(user=>{
         //     return data.usersOnline.includes(user.user_email);
         // })
         // console.log('users online', data.usersOnline, infoParticipants)
-        console.log('VENMON', data.list, infoParticipants,messages)
-        updateGuests()
+        // console.log('VENMON', data.list, infoParticipants,messages)
+        updateGuests(data.list)
         setOnlineUsers(data.usersOnline);
          // updateGuests();
         // if(data.list.length !== infoParticipants.length){
@@ -195,18 +206,18 @@ useEffect(()=>{
         // }
         // setOnlineUsers(data.usersOnline)      
     })
-    }
+
    
-},[loading])
+},[id, infoParticipants.length, messages,loading])
 
 
 
-useEffect(()=>{
-    if(!loading){
-        socket.current.emit('userOnline', {info:infoParticipants});
-    }
+// useEffect(()=>{
+//     if(!loading){
+//         socket.current.emit('userOnline', {info:infoParticipants});
+//     }
     
-},[infoParticipants, loading])
+// },[infoParticipants, loading])
 
 
 // useEffect(()=>{
@@ -351,9 +362,7 @@ useEffect(()=>{
             setMsgInfo(message);
             saveMessage(message, time, id);
             userSetting[user].count++;
-           
-            // const link = `http://localhost:3000/chatroom/${id}`;
-             const link = ` https://venturechat.netlify.app/chatroom/${id}`;
+            const link = `http://localhost:3000/chatroom/${id}`;
             if(newParticipants !== null){
                 const usersToNotify = newParticipants.filter(person=>!onlineUsers.includes(person.user_email)); 
                 sendNotification(usersToNotify,ventureName, user, link);
@@ -361,7 +370,9 @@ useEffect(()=>{
             }
             else{
                 const usersToNotify = infoParticipants.filter(person=>!onlineUsers.includes(person.user_email)); 
-                sendNotification(usersToNotify,ventureName, user, link);
+                const emails = usersToNotify.map(user=>user.user_email);
+                console.log('emaisl to notify', emails);
+                sendNotification(emails, ventureName, user, link);
                 console.log('Notify these users', usersToNotify)
             }
     
@@ -396,7 +407,8 @@ useEffect(()=>{
               newInfoParticipants = {newParticipants}
               ventureBio = {ventureBio}
               userSetting = {userSetting}
-              loading={secondLoading}
+              loading={loading}
+            //   secondLoading = { secondLoading}
               brainstormOwner = { ventureOwner }
               isActive = { isActive }
               

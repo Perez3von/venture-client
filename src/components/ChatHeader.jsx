@@ -1,7 +1,7 @@
 
 import ParticipantInfo from "../components/ParticipantInfo";
 import '../styles/chatHeader.css'
-import groupLogo from '../assets/groupIcon.png'
+
 import { useNavigate, useParams } from "react-router-dom";
 import { getStorage } from "../utils/localStorage";
 import { completeBrainstormAPI, exportVentureChat } from "../utils/api";
@@ -19,6 +19,7 @@ export default function ChatHeader({
     ventureName, 
     ventureBio,
      loading,
+     secondLoading,
      newParticipants,
     brainstormOwner,
     isActive
@@ -34,7 +35,7 @@ const override = css`
   border: none;
  
 `;
-const colors = ['blue', 'red', 'green', 'yellow' ];
+
 
 async function completeBrainstorm(){
     const userEmail = getStorage('EMAIL');
@@ -77,7 +78,7 @@ function countRemain(chat, user){
     return(
         <>
         {
-            loading? <></>:
+            loading || secondLoading ? <></>:
             <>
             <div className="vTitle">{ventureName}</div>
         <div className="vSummary">Summary: {ventureBio}</div>

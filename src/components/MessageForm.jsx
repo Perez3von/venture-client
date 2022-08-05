@@ -30,7 +30,7 @@ useEffect(() => {
     return () => {
       audi.removeEventListener('ended', () => setIsPlaying(false));
     };
-  }, []);
+  }, [audi]);
 
 return(
 <main className="form-container">
