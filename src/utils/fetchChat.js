@@ -13,7 +13,6 @@ export const createNewVentureThread = async (newVentureObj) => {
     
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify(newVentureObj),
       });
