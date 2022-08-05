@@ -10,8 +10,10 @@ export const createNewVentureThread = async (newVentureObj) => {
     const data = await fetch(loginUrl, {
         method: "POST",
         credentials: 'include',
+    
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify(newVentureObj),
       });
